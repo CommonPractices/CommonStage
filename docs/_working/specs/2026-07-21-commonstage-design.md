@@ -374,11 +374,19 @@ normal operating condition.
 **Where CI runs is deliberately out of scope here** and does not change this design. What matters to
 the generator is only that *some* builder pulls by identity.
 
-**Build trigger — not yet decided.** Scheduled and manual are the early-stage pair: no source repo
-learns CommonStage exists, and a rebuild can be forced on demand. Push-triggering each repo is
-faster but requires every source repo to hold a webhook aimed at CommonStage — reintroducing, by a
-side door, the coupling the pull model exists to avoid. It is an optimisation to buy later, if
-staleness proves annoying, and it is reversible.
+**Build trigger — DECIDED 2026-07-22: push-triggered.** A push to a source repo rebuilds its site.
+
+⭐ **This costs nothing in coupling, because the git host and the web host are the same machine.**
+An earlier draft recorded push-triggering as an optimisation to defer, on the grounds that it would
+require *"every source repo to hold a webhook aimed at CommonStage — reintroducing, by a side door,
+the coupling the pull model exists to avoid."* **That reasoning assumed CommonStage was a remote
+consumer.** It is not: Forgejo runs on the same server as the web host, so it already observes every
+push locally and fires the build itself.
+
+**The trigger is therefore server-side and lives in exactly one place.** No source repo holds a
+webhook, a workflow, or any knowledge of CommonStage — §4.5's independence claim holds **fully**,
+and push-triggering is had for free. The two were never actually in tension; the tension was an
+artefact of imagining a remote service.
 
 ---
 
@@ -568,7 +576,7 @@ tool-choice settles:
 (~37 files against a ~500-page threshold), which is why **Speed is not a star** (§1a.3). The
 deciding axis was templating control and toolchain weight, not throughput.
 
-### 8.3 An empty `portfolio` org renders nothing
+### 8.3 Empty `portfolio` org — DECIDED 2026-07-22
 
 **Withdrawn as originally written.** An earlier draft claimed DeckLibre existed both as its own Org
 and as a SurfaceWorks product, and raised a nesting/SSoT question. **That premise was false**,
@@ -579,9 +587,22 @@ currently nested in two orgs, so there is no nesting question to answer.
 
 The real open item the check surfaced instead: **DeckLibre is an org holding only `.github` — no
 product repos.** Under `portfolio` (every repo is a product, with `.github` excluded by rule) it
-renders an index with **zero** product cards. The standard must say what an empty or single-repo
-`portfolio` org does — render an empty index, fall back to a placeholder, or be excluded from
-generation until it has a product. **Undecided.**
+renders an index with **zero** product cards. Two of seven orgs are in this state today
+(StudioEnsemble and DeckLibre), so this is present-state behaviour, not an edge case.
+
+**DECIDED 2026-07-22: render the org page, omit the product list.** Org identity, tagline, and
+blurb render normally; the product section is simply absent — no cards, no placeholder, no
+"coming soon", and the site is **not** skipped.
+
+**Why this is the Honest status (#1) answer.** The org genuinely exists and has an identity worth
+showing; what does not exist is a published product. Rendering the org while omitting the product
+list states exactly that and nothing more. The alternatives each say something false or unhelpful:
+skipping the site entirely implies the org does not exist, and a placeholder card advertises a
+product that has not been published — the same overstatement §4.4 forbids for pre-public repos.
+
+**This is §4.4's rule applied at org scale:** absence is rendered as absence, never dressed up and
+never hidden. A product repo appearing later adds cards with **no config edit**, which is the shape
+flag working as intended.
 
 ### 8.4 Hosting — DECIDED: the owner's own server
 
