@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en" data-theme="daylight">
+<head>
+  <meta charset="utf-8">
+  <title>F3 protected — floor + hostile.css</title>
+  <!-- PROTECTED: foundation.css FIRST (its @layer floor), then the hostile
+       stylesheet. The floor MUST beat every attack, by cascade-layer
+       construction — floor-hard wins !important, floor-soft wins normal. -->
+  <link rel="stylesheet" href="/foundation.css">
+  <link rel="stylesheet" href="/hostile.css">
+</head>
+<body>
+  <a href="#" id="lnk">focusable link</a>
+  <button id="btn">a button</button>
+  <div aria-live="polite" id="live">live region</div>
+  <span class="sr-only" id="sr">screen-reader-only text</span>
+</body>
+</html>

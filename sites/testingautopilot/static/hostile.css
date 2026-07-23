@@ -1,0 +1,36 @@
+/* hostile.css — an ADVERSARIAL product stylesheet whose only goal is to
+   destroy the accessibility floor. It is NOT shipped; it exists solely for the
+   Web UI §2.1 acceptance test (F3): the foundation @layer floor MUST hold
+   against it. Every rule here is a real-world a11y catastrophe, weaponised.
+
+   The test asserts the floor wins. If any assertion passes on the UNPROTECTED
+   control page (foundation.css absent) but the floor stops it here, the floor
+   is proven. A rule that has no effect either way proves nothing. */
+
+/* ATTACK 1 — kill focus outlines. The single most common a11y bug. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: none !important;
+  outline-width: 0 !important;
+}
+
+/* ATTACK 2 — silently mute every screen-reader announcement. */
+[aria-live] {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* ATTACK 3 — collapse interactive targets below usable size. */
+button, select, [role="button"] {
+  min-height: 0 !important;
+  min-width: 0 !important;
+  height: 1px !important;
+}
+
+/* ATTACK 4 — make screen-reader-only text unreachable by un-hiding it wrong,
+   then hiding it from everyone. */
+.sr-only:not([aria-live]) {
+  position: static !important;
+  width: auto !important; height: auto !important;
+  clip-path: none !important;
+  display: none !important;
+}

@@ -772,10 +772,22 @@ warning that the product template is the untested part.
 > for the system). Leaving the palette free would rest stars #2 and #4 on manual vigilance. The
 > constraint is not a nicety; it is what makes the accessibility claim true at the template layer.
 
-**F3 — the hostile-stylesheet acceptance test (Web UI §2.1) is still owed** and is now more clearly
-scoped: it must confirm the `@layer floor-hard`/`floor-soft` floor holds against a `product.css` that
-*tries* to break it, watched to fail against the unprotected version. F2 is the design that keeps a
-*well-meaning* author safe; F3 proves the floor holds against a *hostile* one.
+**F3 — the hostile-stylesheet acceptance test (Web UI §2.1) — DONE, PASSED 2026-07-22.** F2 keeps a
+*well-meaning* author safe; F3 proves the floor holds against a *hostile* one. Executed as a true
+negative control:
+
+- **Attack** (`sites/testingautopilot/static/hostile.css`, **never shipped**): four weaponised
+  real-world a11y catastrophes — `outline:none !important` on `:focus-visible`, `display:none` on
+  `[aria-live]`, buttons collapsed below min size, `.sr-only` un-hidden then hidden from all.
+- **Control** (`f3-control.html`, hostile.css with **no** foundation): **all four attacks landed** —
+  focus killed, live region muted, button 1px, sr-only broken. The attack is proven lethal.
+- **Protected** (`f3-protected.html`, foundation.css **then** hostile.css): **floor held on all
+  four** — focus `solid 3px`, live region visible, button `24px`, sr-only reachable. The
+  `@layer floor-hard`/`floor-soft` construction beats `!important` by layer order alone.
+
+The floor is trusted because it was **watched to fail on the control before holding on the
+protected page** — not asserted. The three files stay in the repo as a permanent, re-runnable
+acceptance test. **`hostile.css` is a test fixture and must never be linked from a shipped page.**
 
 **F4 — build-time signals confirmed reachable.** Real release/download data (`gh api` on the org's
 repos) rendered as page content without any browser-side call — the §4.3 build-time-fetch decision is
