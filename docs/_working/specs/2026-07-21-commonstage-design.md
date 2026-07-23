@@ -806,6 +806,34 @@ Abstracting it into CommonFraming would describe CommonStage's job back to it. T
 it is produced: in CommonStage. (Owner's read; the earlier "future blueprint candidate" note was
 wrong on this and is withdrawn.)
 
+### 8b.2 Findings from the second site (CommonPractices `portfolio`, 2026-07-22)
+
+The `portfolio` proving site — org index + one product page per repo (CommonMind, CommonFraming,
+CommonTongue, CommonStage), built from real `gh api` data.
+
+**F5 — the F2 discipline is validated by evidence, not just argued.** The first site (AutoPilot)
+needed ~20 contrast fixes. The second reused the same F2-disciplined `product.css` (band text →
+`--band-ink`, badge text → `--ink` on a status `-bg`) and **passed the full matrix — index and
+product page, 10/10 cells each — on the *first* build.** Building to the token-on-surface rule from
+the start is what made it pass first-try. This is the measured payoff of §8b F2 being a hard
+requirement, and it is the strongest single argument for extracting that rule into the template.
+
+**F6 — the portfolio product pages are already data-driven, not hand-copied.** One shared
+`product-page.html` template + four content files carrying per-repo front-matter (role, tagline,
+status, repo link). This proves the **config → page** generation the spec calls for — a step beyond
+the first site's hand-written HTML — and shows the extracted apparatus's shape: a template consuming
+per-product data.
+
+**F7 — honest status is load-bearing and works.** Each product carries a plain status
+(living / draft / design stage) on its card and page; CommonStage's own page says *"design stage · no
+code yet … never dressed up as finished."* This is North Star #1 and the §8.7 workshop dependency in
+practice — the site states maturity, never inflates it.
+
+**Zola mechanics learned (for the plan):** section pages expose `section.*`, regular pages expose
+`page.*`; a per-product page is a **colocated page** (`content/<slug>/index.md`, *not* `_index.md`)
+so `page.title`/`page.extra.*` resolve. `zola init` writes `zola.toml` (not `config.toml`) and needs
+a full URL with scheme.
+
 ---
 
 ## 9. What this design does not cover
