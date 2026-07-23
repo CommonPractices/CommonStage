@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en" data-theme="daylight" data-persona="intermediate" data-cb="off">
+<head>
+{% set org_name = config.extra.org_name | default(value="") %}
+{% set page_title = section.title ~ " — " ~ org_name %}
+{% include "_head.html" %}
+</head>
+<body>
+
+{% include "_theme_picker.html" %}
+
+<header class="band hero">
+  <div class="wrap">
+    <p class="eyebrow"><a href="/">{{ org_name }}</a> · {{ section.extra.role }}</p>
+    <h1>{{ section.title }}</h1>
+    <p class="lede">{{ section.extra.tagline }}</p>
+    <p class="status"><span class="dot dot-{{ section.extra.status_kind }}"></span> {{ section.extra.status }}</p>
+    <div class="actions">
+      <a class="btn is-primary" href="{{ section.extra.repo }}">Source on GitHub</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="lead-para">
+    {{ section.content | safe }}
+  </section>
+</main>
+
+<footer class="band foot">
+  <div class="wrap">
+    <p><a href="/">← back to {{ org_name }}</a> · Built with CommonStage.</p>
+  </div>
+</footer>
+
+{% include "_theme_sync.html" %}
+</body>
+</html>

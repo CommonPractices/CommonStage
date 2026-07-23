@@ -933,10 +933,17 @@ family scripting doctrine.
   emitting a broken site. Fixed by omitting absent signals entirely (absence rendered as absence,
   never a fabricated zero).
 
-**Still open (honestly):** the `product`-shape path (org IS the product) is coded but only the
-`portfolio` path is end-to-end verified against real data — the AutoPilot `product` site is still the
-hand-built one, not yet regenerated. Deployment (getting output onto the server behind
-`*.schwefel.net`) and the Forgejo push-trigger wiring remain out of scope, as before.
+**Both shapes now verified end-to-end.** The `product`-shape path (org IS the product) was closed the
+same day: regenerating AutoPilot from config surfaced a real bug — the single product is the site's
+index *section*, which exposes `section.*`, not `page.*`, so `product-page.html` failed. Fixed with
+`product-index.html` (the section-variable variant), and the regenerated `product` site **passes the
+full a11y matrix, zero failures**. A regression test guards it. So **both shapes generate from config
+and both pass the matrix.**
+
+**Still open (honestly):** deployment (getting output onto the server behind `*.schwefel.net`) and
+the Forgejo push-trigger wiring remain out of scope, as before. Publication signals are exercised
+only without a token (so they read as absent-but-expected); a token'd run against live counts is
+untested.
 
 ---
 

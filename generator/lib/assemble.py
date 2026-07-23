@@ -133,6 +133,11 @@ def write_portfolio_product(site, slug, product, derived, weight):
 
 
 def write_single_product(site, product, derived):
-    """A `product`-shape org: one product page AS the site index."""
-    fm = _product_frontmatter(product, derived, "product-page.html")
+    """A `product`-shape org: one product page AS the site index.
+
+    The site index is a Zola SECTION (_index.md), which exposes `section.*`, not
+    `page.*` — so it uses product-index.html (the section-variable variant of
+    product-page.html), not product-page.html. (The Zola mechanic recorded in
+    spec §8b.2, applied.)"""
+    fm = _product_frontmatter(product, derived, "product-index.html")
     _write(site / "content" / "_index.md", fm)
