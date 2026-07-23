@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en" data-theme="daylight" data-persona="intermediate" data-cb="off">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CommonPractices — the family's shared substrate</title>
+  <link rel="stylesheet" href="/foundation.css">
+  <link rel="stylesheet" href="/product.css">
+  <script>
+    (function () {
+      var root = document.documentElement, saved = null;
+      try { saved = localStorage.getItem('cs-theme'); } catch (e) {}
+      if (saved) root.setAttribute('data-theme', saved);
+      else if (matchMedia('(prefers-color-scheme: dark)').matches) root.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+</head>
+<body>
+
+<div class="theme-picker" role="group" aria-label="Appearance">
+  <label for="theme-select">Theme</label>
+  <select id="theme-select" onchange="
+      document.documentElement.setAttribute('data-theme', this.value);
+      try { localStorage.setItem('cs-theme', this.value); } catch (e) {}">
+    <option value="daylight">Daylight</option>
+    <option value="dark">Dark</option>
+    <option value="warm">Warm</option>
+    <option value="paper">Paper</option>
+    <option value="maxcontrast">Max contrast</option>
+  </select>
+  <label for="cb-toggle" class="cb-label">
+    <input type="checkbox" id="cb-toggle" onchange="
+        document.documentElement.setAttribute('data-cb', this.checked ? 'on' : 'off');
+        try { localStorage.setItem('cs-cb', this.checked ? 'on' : 'off'); } catch (e) {}">
+    Colour-blind
+  </label>
+</div>
+
+<header class="band hero">
+  <div class="wrap">
+    <p class="eyebrow">CommonPractices · portfolio</p>
+    <h1>CommonPractices</h1>
+    <p class="lede">The shared substrate every other family here is built on. Not a product — the
+      ground they stand on.</p>
+    <p class="status"><span class="dot"></span> Living · pre-1.0, co-evolving with the family</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="lead-para">
+    <p>Independent programs interoperate because they conform to the same practices — not because
+      they share code. Three of these repos form an <strong>altitude stack</strong>, rising in
+      commitment; a fourth presents the family to the world.</p>
+  </section>
+
+  <section>
+    <h2>Products</h2>
+    <p class="section-sub">Every repo in a <code>portfolio</code> org is a product with its own
+      page. Status is stated plainly — never overstated.</p>
+    <div class="cards">
+
+      <a class="card product-card" href="/commonmind/">
+        <div class="card-head">
+          <h3>CommonMind</h3>
+          <span class="badge badge-living">living</span>
+        </div>
+        <p class="card-role">PRINCIPLES · you read it</p>
+        <p>Cross-project engineering doctrine — the rules that earned their place by being learned
+          the expensive way.</p>
+      </a>
+
+      <a class="card product-card" href="/commonframing/">
+        <div class="card-head">
+          <h3>CommonFraming</h3>
+          <span class="badge badge-draft">draft</span>
+        </div>
+        <p class="card-role">SHAPES · you adapt to it</p>
+        <p>The family's repository of product-shape blueprints — describe a recurring shape once, so
+          the next instance is "supply the specifics," not "re-derive the architecture."</p>
+      </a>
+
+      <a class="card product-card" href="/commontongue/">
+        <div class="card-head">
+          <h3>CommonTongue</h3>
+          <span class="badge badge-living">living</span>
+        </div>
+        <p class="card-role">CONTRACTS · you depend on it</p>
+        <p>The canonical wire contracts every family product speaks, plus the per-language code that
+          realizes them — so independent programs interoperate without shared logic.</p>
+      </a>
+
+      <a class="card product-card" href="/commonstage/">
+        <div class="card-head">
+          <h3>CommonStage</h3>
+          <span class="badge badge-wip">design stage</span>
+        </div>
+        <p class="card-role">PRESENTATION · builds these pages</p>
+        <p>The family's shared web presentation layer — the standard, templates, styling, and
+          generator behind every family Org and product page. This very site.</p>
+      </a>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="band foot">
+  <div class="wrap">
+    <p>CommonPractices is the shared substrate for the family. Built with CommonStage.</p>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var root = document.documentElement, sel = document.getElementById('theme-select');
+    var t = root.getAttribute('data-theme');
+    if (sel && t) sel.value = t;
+    var cb = null;
+    try { cb = localStorage.getItem('cs-cb'); } catch (e) {}
+    if (cb === 'on') { root.setAttribute('data-cb', 'on'); document.getElementById('cb-toggle').checked = true; }
+  })();
+</script>
+</body>
+</html>
