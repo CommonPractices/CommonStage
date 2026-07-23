@@ -1,0 +1,29 @@
+{
+  "_note": "Example org site config. Lives at the org's .github repo root as site.json. Strict JSON (RFC 8259) per CommonMind/data-format-doctrine.md — no comments; annotate in _note fields.",
+
+  "org": "CommonPractices",
+  "hostname": "commonpractices",
+  "shape": "portfolio",
+
+  "name": "CommonPractices",
+  "tagline": "The shared substrate every other family here is built on. Not a product — the ground they stand on.",
+  "blurb": "Independent programs interoperate because they conform to the same practices — not because they share code.",
+  "status": {
+    "kind": "living",
+    "detail": "Living · pre-1.0, co-evolving with the family"
+  },
+
+  "_optional": {
+    "hostname_variant": "",
+    "branch": "",
+    "exclude": [],
+    "order": [],
+    "featured": []
+  },
+
+  "_computed_never_stored": [
+    "canonical URL (from hostname + domain)",
+    "org colour + identity mark (from .github/profile/)",
+    "the product list (from the git host — every repo except .github, minus exclude)"
+  ]
+}

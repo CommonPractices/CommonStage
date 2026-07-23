@@ -388,6 +388,67 @@ webhook, a workflow, or any knowledge of CommonStage — §4.5's independence cl
 and push-triggering is had for free. The two were never actually in tension; the tension was an
 artefact of imagining a remote service.
 
+### 4.6 The concrete config schema — CONCRETIZED 2026-07-23
+
+§4.1 was provisional pending the tool and the proving sites. Both now exist, so the schema is
+concretized **from what the two sites actually consumed**, not invented. Working examples ship at
+`apparatus/schema/`. Strict JSON throughout (`CommonMind/data-format-doctrine.md`) — no comments,
+`_note` for annotation.
+
+**Two files, split by ownership (SSoT + the Independence finding):**
+
+- **Org config — `site.json` at the org's `.github` repo root.** Org identity and shape. One per org.
+- **Per-product config — `.commonstage.json` at each product repo's root.** That product's own
+  facts. The org config **never restates** these — a repo owner edits their own page. (Ratified
+  2026-07-23; the alternative — one central file listing every product — was rejected because it
+  moves product facts away from the product.)
+
+**Org config (`site.json`) fields:**
+
+| Field | Req? | Notes |
+|---|---|---|
+| `org` | ✔ | Source-host namespace. Never rendered. |
+| `hostname` | ✔ | Yields `<hostname>.schwefel.net`. Not derived from `org` (§4.1.1). |
+| `shape` | ✔ | `product` \| `portfolio` (§2). |
+| `name` | authored | Display name. |
+| `tagline`, `blurb` | authored | Org index band + lead prose. No GitHub fallback (no org sets a description). |
+| `status` | authored | `{kind, detail}` — see the enum below. |
+| `hostname_variant`, `branch`, `exclude`, `order`, `featured` | optional | §4.1.1/§4.1.2 and the `portfolio` escape hatches. |
+
+**Per-product config (`.commonstage.json`) fields:**
+
+| Field | Req? | Notes |
+|---|---|---|
+| `name`, `tagline`, `role` | authored | Card + hero. |
+| `status` | authored | `{kind, detail}` — the honest-status contract, below. |
+| `description` | authored | Body prose. |
+| `screenshots`, `install`, `featured_signals` | optional | Product-page content. |
+
+**`status.kind` is an ENUM — this is what makes Honest status (#1) enforceable rather than decorative.**
+`detail` is free text that elaborates the kind (e.g. *"cold, not frozen"*), keeping nuance; `kind` is
+a machine-checkable maturity claim that drives the status colour and can be validated:
+
+| `kind` | Means | Family example |
+|---|---|---|
+| `shipping` | Released, has versioned artifacts to download | AutoPilot (v3.5.0) |
+| `active` | Usable and maintained, no formal release cadence | — |
+| `living` | Mutable-by-design; evolves continuously, not versioned | CommonMind, CommonTongue |
+| `beta` | Works, not yet stable | — |
+| `draft` | Exists, pre-1.0, incomplete | CommonFraming |
+| `wip` | Design/build stage; not yet usable | CommonStage |
+
+The enum is **open to extension** (a new kind is added when a real product needs one), but a value
+outside it is a config error, not a silent pass — so a page can never claim a maturity the family
+has not defined.
+
+**Computed, never stored** (§4.1's SSoT rule, now itemised per file): canonical URL, org colour +
+mark, repo list (org); repo URL, licence, publication signals (product). Storing any of these creates
+a second home for one fact.
+
+⚠️ **Not yet built:** the generator that reads these two files and produces the pages. The schema is
+now fixed enough to build against; §8b F6 shows the shape (a template consuming this data), and §8b
+F2 is the **hard** constraint it must encode.
+
 ---
 
 ## 5. Relationship to existing family assets
@@ -660,6 +721,11 @@ config at all.
 **Not decided, and deliberately not resolved by default.** Deployment mechanics are out of scope for
 now, so putting these fields in the identity config *provisionally* risks calcifying a placement
 nobody chose. Recorded here so the placement stays a decision rather than an accident.
+
+> **Status 2026-07-23:** §4.6 places `hostname_variant` and `branch` in the org `site.json` under
+> `_optional` — **provisionally**, exactly as this section warns. Convenient for now (one file), but
+> **still not ratified as their home.** If a deployment-shaped config emerges later, they move there.
+> The placement is marked, not settled.
 
 ### 8.7 Workshop is first-class — render-everything **retained** (owner ruling, 2026-07-22)
 
