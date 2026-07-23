@@ -3,8 +3,9 @@
 The family's shared web presentation layer: the standard, templates, styling, config schema, and
 generator for the public web pages of every family Org and product.
 
-**Status: early. Two proving sites built; the reusable apparatus is extracted; the config-driven
-generator is not built yet.**
+**Status: working. Two proving sites, the extracted apparatus, and a config-driven generator that
+builds a family site from config alone — verified: generated output passes the full accessibility
+matrix. Deployment to the server is the remaining piece.**
 
 ## What it is
 
@@ -34,7 +35,27 @@ docs/_working/specs/   the design spec (working draft)
 two `sites/` are concrete proofs, built before the generator so the generator encodes what they
 taught (see the spec's §8b findings).
 
-## Building a site
+## Generating a site from config
+
+The generator turns an org's `site.json` + each product's `.commonstage.json` into a finished site:
+
+```
+python3 generator/build_site.py \
+  --org-config path/to/site.json \
+  --repos-dir  path/to/product-repos \
+  --out        build/<org> \
+  --foundation CommonMind/assets/foundation.css \
+  [--github-token TOKEN]        # optional: publication signals
+```
+
+It validates configs (an off-enum `status.kind` is a fatal error), computes derived facts, fetches
+optional publication signals, assembles a Zola site from `apparatus/`, runs `zola build`, and prints
+a **delta report** distinguishing rendered / unpublished / faulted. Exit 0 = clean, 1 = faults,
+2 = fatal config error. Python, stdlib-only — no dependencies beyond `zola` on PATH.
+
+Tests: `python3 generator/tests/test_config.py && python3 generator/tests/test_endtoend.py`.
+
+## Building a single site by hand (dev)
 
 ```
 brew install zola          # or your platform's package

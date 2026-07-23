@@ -445,9 +445,9 @@ has not defined.
 mark, repo list (org); repo URL, licence, publication signals (product). Storing any of these creates
 a second home for one fact.
 
-⚠️ **Not yet built:** the generator that reads these two files and produces the pages. The schema is
-now fixed enough to build against; §8b F6 shows the shape (a template consuming this data), and §8b
-F2 is the **hard** constraint it must encode.
+✅ **Built 2026-07-23** — the generator that reads these two files and produces the pages now exists
+(`generator/`, Python, stdlib-only). It generated the real CommonPractices portfolio site from
+config alone, and the output passes the full a11y matrix. See §8b.3.
 
 ---
 
@@ -899,6 +899,44 @@ practice — the site states maturity, never inflates it.
 `page.*`; a per-product page is a **colocated page** (`content/<slug>/index.md`, *not* `_index.md`)
 so `page.title`/`page.extra.*` resolve. `zola init` writes `zola.toml` (not `config.toml`) and needs
 a full URL with scheme.
+
+### 8b.3 The generator — built and verified 2026-07-23
+
+The config-driven generator (`generator/`, Python, stdlib-only) now exists. It reads the §4.6 config
+files, computes the derived facts, fetches optional signals, assembles a Zola site from `apparatus/`,
+runs `zola build`, and prints the delta report. Thin orchestrator over `generator/lib/` per the
+family scripting doctrine.
+
+**What building it confirmed:**
+
+- **F5 held at generator scale.** The generator emits the same apparatus CSS + templates, so the
+  generated CommonPractices portfolio (index + 4 product pages, from config alone) **passes the full
+  a11y matrix — 10/10 cells, index and product page, zero failures.** The F2 token-on-surface
+  contract, extracted into `stage.css`, carries through to generated output for free. This is the
+  payoff of making F2 a hard requirement: it holds without per-site vigilance.
+
+- **§4.4 "loud ≠ fatal" works as specified.** A **negative control** — one repo given an off-enum
+  `status.kind` — faulted that repo with a mapped error (file, bad value, allowed set, spec ref),
+  **still rendered the other three**, and exited non-zero. A broken or forgotten repo can never read
+  as success.
+
+- **The honest-status enum is enforced, not decorative.** `status.kind` outside the defined set is a
+  fatal config error. The validating test was **watched to fail with the check disabled**, then pass
+  restored — the fix-isn't-fixed gate. A page cannot claim a maturity the family has not defined.
+
+- **Apparatus templates parameterized by config.** `product-page.html` and `portfolio-index.html`
+  moved into `apparatus/` and read the org name from `config.extra`, so **one template set drives any
+  org** — no per-org template. The apparatus is now the complete rendering source.
+
+- **A real bug, caught by the delta report, not a silent bad build.** First run serialized `signals`
+  as JSON `null` into TOML front-matter, which Zola rejects; the report **faulted** rather than
+  emitting a broken site. Fixed by omitting absent signals entirely (absence rendered as absence,
+  never a fabricated zero).
+
+**Still open (honestly):** the `product`-shape path (org IS the product) is coded but only the
+`portfolio` path is end-to-end verified against real data — the AutoPilot `product` site is still the
+hand-built one, not yet regenerated. Deployment (getting output onto the server behind
+`*.schwefel.net`) and the Forgejo push-trigger wiring remain out of scope, as before.
 
 ---
 
