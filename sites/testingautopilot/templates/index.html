@@ -1,1 +1,165 @@
-{% extends "base.html" %}{% block content %}<h1>AutoPilot</h1>{% endblock %}
+<!doctype html>
+<html lang="en" data-theme="daylight" data-persona="intermediate" data-cb="off">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AutoPilot — declarative GUI testing, every platform</title>
+  <link rel="stylesheet" href="/foundation.css">
+  <link rel="stylesheet" href="/product.css">
+  <script>
+    // Honour the OS setting on first paint, then let the picker override.
+    (function () {
+      var root = document.documentElement;
+      var saved = null;
+      try { saved = localStorage.getItem('cs-theme'); } catch (e) {}
+      if (saved) { root.setAttribute('data-theme', saved); }
+      else if (matchMedia('(prefers-color-scheme: dark)').matches) {
+        root.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+</head>
+<body>
+
+<div class="theme-picker" role="group" aria-label="Appearance">
+  <label for="theme-select">Theme</label>
+  <select id="theme-select" onchange="
+      document.documentElement.setAttribute('data-theme', this.value);
+      try { localStorage.setItem('cs-theme', this.value); } catch (e) {}">
+    <option value="daylight">Daylight</option>
+    <option value="dark">Dark</option>
+    <option value="warm">Warm</option>
+    <option value="paper">Paper</option>
+    <option value="maxcontrast">Max contrast</option>
+  </select>
+  <label for="cb-toggle" class="cb-label">
+    <input type="checkbox" id="cb-toggle" onchange="
+        document.documentElement.setAttribute('data-cb', this.checked ? 'on' : 'off');
+        try { localStorage.setItem('cs-cb', this.checked ? 'on' : 'off'); } catch (e) {}">
+    Colour-blind
+  </label>
+</div>
+
+<header class="band hero">
+  <div class="wrap">
+    <p class="eyebrow">TestingAutoPilot</p>
+    <h1>AutoPilot</h1>
+    <p class="lede">Declarative GUI testing and automation. One plan, every platform.
+      <strong>No LLM in the execution path.</strong></p>
+    <p class="status"><span class="dot"></span> Active · latest release <strong>v3.5.0</strong></p>
+    <div class="actions">
+      <a class="btn is-primary" href="#install">Install</a>
+      <a class="btn" href="https://github.com/TestingAutoPilot">Source on GitHub</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="lead-para">
+    <p>AutoPilot drives real applications the way a person does — clicking, typing, scrolling,
+      asserting — from a single declarative JSON <strong>plan</strong>. Each platform reimplements
+      the same plan loop natively against its own accessibility API, so a plan is a description of
+      <em>intent</em>, not a script of coordinates.</p>
+    <p>Because there is no language model at runtime, runs are <strong>deterministic and
+      reproducible</strong>: the same plan produces the same result, in CI or on your desk.</p>
+  </section>
+
+  <section>
+    <h2>Four platforms, one contract</h2>
+    <p class="section-sub">The <strong>only</strong> shared artifact is the JSON plan schema.
+      Nothing else crosses platform boundaries — no shared runtime, no lowest-common-denominator
+      abstraction layer.</p>
+    <div class="grid">
+      <div class="card platform">
+        <h3>macOS</h3>
+        <p class="impl">Swift · Accessibility API</p>
+        <p>Drives native macOS apps.</p>
+      </div>
+      <div class="card platform">
+        <h3>iOS</h3>
+        <p class="impl">Swift · XCUITest</p>
+        <p>Real devices and simulators.</p>
+      </div>
+      <div class="card platform">
+        <h3>Android</h3>
+        <p class="impl">Kotlin · UiAutomator</p>
+        <p>Real devices and emulators.</p>
+      </div>
+      <div class="card platform">
+        <h3>Web</h3>
+        <p class="impl">TypeScript · Playwright</p>
+        <p>Any browser page.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="split">
+    <div>
+      <h2>Skip, don't branch</h2>
+      <p>Some steps genuinely cannot exist everywhere: there is no menu bar on Android, no native
+        pixel capture in a browser. Rather than forcing plans to fork per platform, a backend that
+        cannot perform a step <strong>skips it and passes</strong>, never errors.</p>
+      <p>One plan runs everywhere. Skips are reported honestly, so you always know what did and did
+        not execute.</p>
+    </div>
+    <figure class="shot">
+      <div class="shot-placeholder">screenshot: a plan running, skips reported</div>
+      <figcaption>A run report — passes, assertions, and honest skips.</figcaption>
+    </figure>
+  </section>
+
+  <section id="install">
+    <h2>Install</h2>
+    <p class="section-sub">macOS, via the Homebrew tap:</p>
+    <pre class="code"><code>brew install testingautopilot/autopilot/autopilot</code></pre>
+    <p class="fineprint">iOS, Android, and Web hosts are built from their platform repos — see the
+      <a href="https://github.com/TestingAutoPilot">source</a>.</p>
+  </section>
+
+  <section>
+    <h2>Releases</h2>
+    <div class="signals">
+      <div class="signal">
+        <span class="signal-num">v3.5.0</span>
+        <span class="signal-label">latest release</span>
+      </div>
+      <div class="signal">
+        <span class="signal-num">4 + 1</span>
+        <span class="signal-label">platforms + tap</span>
+      </div>
+      <div class="signal">
+        <span class="signal-num">Apache-2.0</span>
+        <span class="signal-label">licence</span>
+      </div>
+    </div>
+    <p class="fineprint">Download and star counts are pulled from the git host at build time — shown
+      here as content, never fetched from your browser.</p>
+  </section>
+
+</main>
+
+<footer class="band foot">
+  <div class="wrap">
+    <p>AutoPilot is part of the <a href="https://github.com/TestingAutoPilot">TestingAutoPilot</a>
+      family. Built with CommonStage.</p>
+  </div>
+</footer>
+
+<script>
+  // Reflect the loaded theme + cb state in the controls.
+  (function () {
+    var root = document.documentElement;
+    var sel = document.getElementById('theme-select');
+    var t = root.getAttribute('data-theme');
+    if (sel && t) sel.value = t;
+    var cbSaved = null;
+    try { cbSaved = localStorage.getItem('cs-cb'); } catch (e) {}
+    if (cbSaved === 'on') {
+      root.setAttribute('data-cb', 'on');
+      document.getElementById('cb-toggle').checked = true;
+    }
+  })();
+</script>
+</body>
+</html>

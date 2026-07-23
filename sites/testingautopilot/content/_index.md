@@ -1,3 +1,3 @@
 +++
-title = "AutoPilot"
+template = "index.html"
 +++
