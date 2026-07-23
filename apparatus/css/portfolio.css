@@ -1,0 +1,52 @@
+/* ═══ Portfolio index — cards + status badges ═══════════════════════════════
+   Added for the CommonPractices portfolio site. Status badges use foundation's
+   semantic status tokens; badge text is --ink (calibrated for the page) on the
+   status -bg fill, NOT the status colour on its own -bg (that pair is not a
+   guaranteed 4.5:1 for text). Verified by the full-matrix audit. */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: calc(var(--pad) * 1.5);
+}
+.product-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color var(--dur);
+}
+.product-card:hover { border-color: var(--line-strong); }
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap);
+  margin-bottom: calc(var(--gap) * 0.5);
+}
+.card-head h3 { margin: 0; font-size: var(--size-lg); }
+.card-role {
+  font-family: var(--font-mono);
+  font-size: var(--size-sm);
+  color: var(--accent);
+  margin: 0 0 var(--gap);
+  letter-spacing: 0.02em;
+}
+.product-card > p:last-child { color: var(--ink-dim); margin: 0; }
+
+.badge {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: calc(var(--size-sm) * 0.92);
+  padding: calc(var(--gap) * 0.35) calc(var(--gap) * 0.9);
+  border-radius: var(--r);
+  border: 1px solid var(--line);
+  color: var(--ink);            /* page ink on a light status fill — audited */
+  white-space: nowrap;
+}
+.badge-living { background: var(--green-bg); border-color: var(--green); }
+.badge-draft  { background: var(--amber-bg); border-color: var(--amber); }
+.badge-wip    { background: var(--panel-sunk); border-color: var(--line-strong); }
+
+/* Status dots — decorative; the accompanying text carries the actual status. */
+.dot-living { background: var(--green); }
+.dot-draft  { background: var(--amber); }
+.dot-wip    { background: var(--ink-faint); }

@@ -1,0 +1,22 @@
+{# _theme_picker.html — the CommonStage appearance control.
+   Ships all five required themes (visual-identity.md §1a) in one menu plus a
+   SEPARATE colour-blind toggle (the §-checklist requirement). Shared; never
+   copied per-site. #}
+<div class="theme-picker" role="group" aria-label="Appearance">
+  <label for="theme-select">Theme</label>
+  <select id="theme-select" onchange="
+      document.documentElement.setAttribute('data-theme', this.value);
+      try { localStorage.setItem('cs-theme', this.value); } catch (e) {}">
+    <option value="daylight">Daylight</option>
+    <option value="dark">Dark</option>
+    <option value="warm">Warm</option>
+    <option value="paper">Paper</option>
+    <option value="maxcontrast">Max contrast</option>
+  </select>
+  <label for="cb-toggle" class="cb-label">
+    <input type="checkbox" id="cb-toggle" onchange="
+        document.documentElement.setAttribute('data-cb', this.checked ? 'on' : 'off');
+        try { localStorage.setItem('cs-cb', this.checked ? 'on' : 'off'); } catch (e) {}">
+    Colour-blind
+  </label>
+</div>

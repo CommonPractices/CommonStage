@@ -1,44 +1,12 @@
 <!doctype html>
 <html lang="en" data-theme="daylight" data-persona="intermediate" data-cb="off">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AutoPilot — declarative GUI testing, every platform</title>
-  <link rel="stylesheet" href="/foundation.css">
-  <link rel="stylesheet" href="/product.css">
-  <script>
-    // Honour the OS setting on first paint, then let the picker override.
-    (function () {
-      var root = document.documentElement;
-      var saved = null;
-      try { saved = localStorage.getItem('cs-theme'); } catch (e) {}
-      if (saved) { root.setAttribute('data-theme', saved); }
-      else if (matchMedia('(prefers-color-scheme: dark)').matches) {
-        root.setAttribute('data-theme', 'dark');
-      }
-    })();
-  </script>
+{% set page_title = "AutoPilot — declarative GUI testing, every platform" %}
+{% include "_head.html" %}
 </head>
 <body>
 
-<div class="theme-picker" role="group" aria-label="Appearance">
-  <label for="theme-select">Theme</label>
-  <select id="theme-select" onchange="
-      document.documentElement.setAttribute('data-theme', this.value);
-      try { localStorage.setItem('cs-theme', this.value); } catch (e) {}">
-    <option value="daylight">Daylight</option>
-    <option value="dark">Dark</option>
-    <option value="warm">Warm</option>
-    <option value="paper">Paper</option>
-    <option value="maxcontrast">Max contrast</option>
-  </select>
-  <label for="cb-toggle" class="cb-label">
-    <input type="checkbox" id="cb-toggle" onchange="
-        document.documentElement.setAttribute('data-cb', this.checked ? 'on' : 'off');
-        try { localStorage.setItem('cs-cb', this.checked ? 'on' : 'off'); } catch (e) {}">
-    Colour-blind
-  </label>
-</div>
+{% include "_theme_picker.html" %}
 
 <header class="band hero">
   <div class="wrap">
@@ -146,20 +114,6 @@
   </div>
 </footer>
 
-<script>
-  // Reflect the loaded theme + cb state in the controls.
-  (function () {
-    var root = document.documentElement;
-    var sel = document.getElementById('theme-select');
-    var t = root.getAttribute('data-theme');
-    if (sel && t) sel.value = t;
-    var cbSaved = null;
-    try { cbSaved = localStorage.getItem('cs-cb'); } catch (e) {}
-    if (cbSaved === 'on') {
-      root.setAttribute('data-cb', 'on');
-      document.getElementById('cb-toggle').checked = true;
-    }
-  })();
-</script>
+{% include "_theme_sync.html" %}
 </body>
 </html>

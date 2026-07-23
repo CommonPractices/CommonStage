@@ -1,7 +1,27 @@
-/* product.css — page STRUCTURE only.
+/* ═══════════════════════════════════════════════════════════════════════════
+   stage.css — CommonStage's shared page STRUCTURE. Extracted from the two
+   proving sites (TestingAutoPilot + CommonPractices). Consumed by every site;
+   never copied per-site.
+
    Colour, type, theming, and the accessibility floor belong to foundation.css.
-   This file uses only foundation's design tokens, so it themes light/dark for free
-   and never restates a value foundation owns. */
+   This file uses only foundation's design tokens, so it themes across all five
+   themes for free and never restates a value foundation owns.
+
+   ── THE TOKEN-ON-SURFACE CONTRACT (spec §8b F2 — HARD requirement) ──────────
+   A page author may NOT put an arbitrary foundation ink on an arbitrary
+   surface. Every contrast failure on the first proving site came from breaking
+   this. The legal pairings, enforced by the classes below:
+
+     • text on a .band (hero/footer)  → --band-ink      (never --ink-dim/-faint)
+     • a primary action (.is-primary) → --ink on --ground (never an accent fill)
+     • body text on the page ground   → --ink / --ink-dim / --ink-faint
+     • a status badge                 → --ink on a status -bg (never status
+                                        colour on its own -bg — not a text pair)
+
+   Verified: both proving sites pass the full accessibility matrix (5 themes ×
+   colour-blind on/off = 10 cells) with zero failures. The second site passed
+   on its FIRST build because it obeyed this contract from the start.
+   ═══════════════════════════════════════════════════════════════════════════ */
 
 .wrap {
   max-width: 62rem;
@@ -217,3 +237,4 @@ h2 { font-size: calc(var(--size) * 1.9); margin: 0 0 calc(var(--gap) * 2); }
   .split { grid-template-columns: 1fr; }
   .hero h1 { font-size: calc(var(--size) * 2.6); }
 }
+

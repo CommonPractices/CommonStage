@@ -1,0 +1,240 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   stage.css — CommonStage's shared page STRUCTURE. Extracted from the two
+   proving sites (TestingAutoPilot + CommonPractices). Consumed by every site;
+   never copied per-site.
+
+   Colour, type, theming, and the accessibility floor belong to foundation.css.
+   This file uses only foundation's design tokens, so it themes across all five
+   themes for free and never restates a value foundation owns.
+
+   ── THE TOKEN-ON-SURFACE CONTRACT (spec §8b F2 — HARD requirement) ──────────
+   A page author may NOT put an arbitrary foundation ink on an arbitrary
+   surface. Every contrast failure on the first proving site came from breaking
+   this. The legal pairings, enforced by the classes below:
+
+     • text on a .band (hero/footer)  → --band-ink      (never --ink-dim/-faint)
+     • a primary action (.is-primary) → --ink on --ground (never an accent fill)
+     • body text on the page ground   → --ink / --ink-dim / --ink-faint
+     • a status badge                 → --ink on a status -bg (never status
+                                        colour on its own -bg — not a text pair)
+
+   Verified: both proving sites pass the full accessibility matrix (5 themes ×
+   colour-blind on/off = 10 cells) with zero failures. The second site passed
+   on its FIRST build because it obeyed this contract from the start.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.wrap {
+  max-width: 62rem;
+  margin-inline: auto;
+  padding-inline: calc(var(--pad) * 2);
+}
+
+/* --- Theme picker (top-right) --- */
+.theme-picker {
+  position: fixed;
+  top: var(--pad);
+  right: var(--pad);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: calc(var(--gap) * 0.75) var(--pad);
+  font-size: var(--size-sm);
+}
+.theme-picker > label { color: var(--ink-dim); font-family: var(--font-mono); }
+.cb-label {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--gap) * 0.5);
+  color: var(--ink-dim);
+  font-family: var(--font-mono);
+}
+
+/* --- Bands (hero + footer) ---
+   A band paints its OWN background (--band) and all text on it derives from
+   --band-ink, the ink foundation.css calibrates to contrast against --band in
+   every theme. Never put a page-ground ink (--ink-dim/--ink-faint) on a band. */
+.band {
+  background: var(--band);
+  color: var(--band-ink);
+}
+.band a { color: var(--band-ink); }
+
+.hero {
+  padding-block: calc(var(--pad) * 6) calc(var(--pad) * 5);
+}
+.eyebrow {
+  font: var(--weight) var(--size-sm) / 1.2 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--band-ink);
+  opacity: 0.75;             /* dim via opacity on the band ink, not a page ink */
+  margin: 0 0 calc(var(--gap) * 1.5);
+}
+.hero h1 {
+  font-size: calc(var(--size) * 3.4);
+  line-height: 1.02;
+  margin: 0 0 calc(var(--gap) * 2);
+}
+.lede {
+  font-size: var(--size-lg);
+  line-height: 1.35;
+  max-width: 40ch;
+  color: var(--band-ink);
+  margin: 0 0 calc(var(--gap) * 2.5);
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap);
+  font-size: var(--size-sm);
+  color: var(--band-ink);
+  margin: 0 0 calc(var(--pad) * 2.5);
+}
+.status .dot {
+  width: 0.6em; height: 0.6em;
+  border-radius: 50%;
+  background: var(--green);
+  flex: none;
+}
+
+.actions { display: flex; gap: var(--gap); flex-wrap: wrap; }
+/* Buttons on a band get an explicit panel fill so text contrasts against the
+   BUTTON, not the band. foundation.css scopes `button.is-primary` to <button>;
+   these anchors mirror its ink-on-ground pairing — the highest-contrast pair in
+   every theme — rather than an accent fill (accent is not guaranteed to contrast
+   against accent-ink at text size; foundation uses accent for borders, not fills). */
+.hero .btn {
+  background: var(--panel);
+  color: var(--ink);
+  border-color: var(--line-strong);
+  text-decoration: none;
+}
+.hero .btn.is-primary {
+  background: var(--ink);
+  color: var(--ground);
+  border-color: var(--ink);
+}
+
+/* --- Body sections --- */
+main section { padding-block: calc(var(--pad) * 4); }
+main section + section { border-top: 1px solid var(--line); }
+
+.lead-para p {
+  font-size: var(--size-lg);
+  line-height: 1.5;
+  max-width: 60ch;
+  color: var(--ink-dim);
+}
+.lead-para strong, .lead-para em { color: var(--ink); }
+
+h2 { font-size: calc(var(--size) * 1.9); margin: 0 0 calc(var(--gap) * 2); }
+.section-sub {
+  max-width: 60ch;
+  color: var(--ink-dim);
+  margin: 0 0 calc(var(--pad) * 2.5);
+}
+
+/* --- Platform grid --- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: calc(var(--pad) * 1.5);
+}
+.platform h3 { margin: 0 0 calc(var(--gap) * 0.5); font-size: var(--size-lg); }
+.platform .impl {
+  font-family: var(--font-mono);
+  font-size: var(--size-sm);
+  color: var(--accent);
+  margin: 0 0 var(--gap);
+}
+.platform p:last-child { color: var(--ink-dim); margin: 0; }
+
+/* --- Split (prose + screenshot) --- */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: calc(var(--pad) * 3);
+  align-items: center;
+}
+.split p { color: var(--ink-dim); line-height: 1.5; max-width: 48ch; }
+.split strong { color: var(--ink); }
+.shot { margin: 0; }
+.shot-placeholder {
+  aspect-ratio: 16 / 10;
+  background: var(--panel-sunk);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--r);
+  display: grid;
+  place-items: center;
+  color: var(--ink-faint);
+  font: var(--size-sm) var(--font-mono);
+  text-align: center;
+  padding: var(--pad);
+}
+.shot figcaption {
+  font-size: var(--size-sm);
+  color: var(--ink-faint);
+  margin-top: var(--gap);
+}
+
+/* --- Install code --- */
+.code {
+  background: var(--panel-sunk);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: calc(var(--pad) * 1.5);
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: var(--size);
+}
+.fineprint { font-size: var(--size-sm); color: var(--ink-dim); max-width: 60ch; }
+/* Links inside fineprint must not inherit the dim body colour — they carry
+   full --ink and an underline so they never rely on colour alone. */
+.fineprint a { color: var(--ink); text-decoration: underline; }
+
+/* --- Signals --- */
+.signals {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: calc(var(--pad) * 1.5);
+  margin-bottom: calc(var(--pad) * 2);
+}
+.signal {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: calc(var(--pad) * 1.5);
+}
+.signal-num {
+  display: block;
+  font-size: calc(var(--size) * 1.8);
+  font-weight: 600;
+  line-height: 1;
+  margin-bottom: calc(var(--gap) * 0.75);
+}
+.signal-label {
+  font-size: var(--size-sm);
+  color: var(--ink-faint);
+  font-family: var(--font-mono);
+}
+
+/* --- Footer --- */
+.foot {
+  padding-block: calc(var(--pad) * 3);
+  border-top: 1px solid var(--line);
+  margin-top: calc(var(--pad) * 4);
+}
+.foot { border-top: none; }   /* the band already separates it */
+.foot p { color: var(--band-ink); font-size: var(--size-sm); margin: 0; }
+
+/* --- Narrow --- */
+@media (max-width: 46rem) {
+  .split { grid-template-columns: 1fr; }
+  .hero h1 { font-size: calc(var(--size) * 2.6); }
+}
+

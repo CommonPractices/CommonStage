@@ -1,40 +1,12 @@
 <!doctype html>
 <html lang="en" data-theme="daylight" data-persona="intermediate" data-cb="off">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ page.title }} — CommonPractices</title>
-  <link rel="stylesheet" href="/foundation.css">
-  <link rel="stylesheet" href="/product.css">
-  <script>
-    (function () {
-      var root = document.documentElement, saved = null;
-      try { saved = localStorage.getItem('cs-theme'); } catch (e) {}
-      if (saved) root.setAttribute('data-theme', saved);
-      else if (matchMedia('(prefers-color-scheme: dark)').matches) root.setAttribute('data-theme', 'dark');
-    })();
-  </script>
+{% set page_title = page.title ~ " — CommonPractices" %}
+{% include "_head.html" %}
 </head>
 <body>
 
-<div class="theme-picker" role="group" aria-label="Appearance">
-  <label for="theme-select">Theme</label>
-  <select id="theme-select" onchange="
-      document.documentElement.setAttribute('data-theme', this.value);
-      try { localStorage.setItem('cs-theme', this.value); } catch (e) {}">
-    <option value="daylight">Daylight</option>
-    <option value="dark">Dark</option>
-    <option value="warm">Warm</option>
-    <option value="paper">Paper</option>
-    <option value="maxcontrast">Max contrast</option>
-  </select>
-  <label for="cb-toggle" class="cb-label">
-    <input type="checkbox" id="cb-toggle" onchange="
-        document.documentElement.setAttribute('data-cb', this.checked ? 'on' : 'off');
-        try { localStorage.setItem('cs-cb', this.checked ? 'on' : 'off'); } catch (e) {}">
-    Colour-blind
-  </label>
-</div>
+{% include "_theme_picker.html" %}
 
 <header class="band hero">
   <div class="wrap">
@@ -60,13 +32,6 @@
   </div>
 </footer>
 
-<script>
-  (function () {
-    var root = document.documentElement, sel = document.getElementById('theme-select');
-    var t = root.getAttribute('data-theme'); if (sel && t) sel.value = t;
-    var cb = null; try { cb = localStorage.getItem('cs-cb'); } catch (e) {}
-    if (cb === 'on') { root.setAttribute('data-cb', 'on'); document.getElementById('cb-toggle').checked = true; }
-  })();
-</script>
+{% include "_theme_sync.html" %}
 </body>
 </html>
