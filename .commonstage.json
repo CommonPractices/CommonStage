@@ -1,0 +1,11 @@
+{
+  "_note": "Product config for CommonStage generator test.",
+  "name": "CommonStage",
+  "tagline": "The family's shared web presentation layer \u2014 the standard, templates, styling, and generator behind every family Org and product page.",
+  "role": "PRESENTATION \u00b7 builds these pages",
+  "status": {
+    "kind": "wip",
+    "detail": "Design stage \u00b7 no code yet"
+  },
+  "description": "CommonStage is the family's shared web presentation layer \u2014 the standard, templates, styling, config\nschema, and generator behind every family Org and product page. **This very site is built with it.**\n\nIt is at the **design stage**: the shape is settled and the first pages exist as hand-built proofs,\nbut the reusable generator has not been extracted yet. Shown here honestly as work in progress \u2014\nnever dressed up as finished."
+}

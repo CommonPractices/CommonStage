@@ -42,11 +42,21 @@
   color: var(--ink);            /* page ink on a light status fill — audited */
   white-space: nowrap;
 }
-.badge-living { background: var(--green-bg); border-color: var(--green); }
-.badge-draft  { background: var(--amber-bg); border-color: var(--amber); }
-.badge-wip    { background: var(--panel-sunk); border-color: var(--line-strong); }
+/* All six status kinds (spec §4.6 enum), mapped to semantic status colours.
+   Text is --ink on the fill (audited safe across the full matrix); the fill
+   and border carry the meaning. green = good/settled, amber = in progress,
+   neutral = not-yet-usable. */
+.badge-shipping { background: var(--green-bg); border-color: var(--green); }
+.badge-active   { background: var(--green-bg); border-color: var(--green); }
+.badge-living   { background: var(--green-bg); border-color: var(--green); }
+.badge-beta     { background: var(--amber-bg); border-color: var(--amber); }
+.badge-draft    { background: var(--amber-bg); border-color: var(--amber); }
+.badge-wip      { background: var(--panel-sunk); border-color: var(--line-strong); }
 
 /* Status dots — decorative; the accompanying text carries the actual status. */
-.dot-living { background: var(--green); }
-.dot-draft  { background: var(--amber); }
-.dot-wip    { background: var(--ink-faint); }
+.dot-shipping { background: var(--green); }
+.dot-active   { background: var(--green); }
+.dot-living   { background: var(--green); }
+.dot-beta     { background: var(--amber); }
+.dot-draft    { background: var(--amber); }
+.dot-wip      { background: var(--ink-faint); }

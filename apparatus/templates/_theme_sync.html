@@ -1,0 +1,12 @@
+{# _theme_sync.html — reflect the loaded theme + cb state in the controls.
+   Runs after the picker exists. Shared; never copied per-site. #}
+<script>
+  (function () {
+    var root = document.documentElement, sel = document.getElementById('theme-select');
+    var t = root.getAttribute('data-theme');
+    if (sel && t) sel.value = t;
+    var cb = null;
+    try { cb = localStorage.getItem('cs-cb'); } catch (e) {}
+    if (cb === 'on') { root.setAttribute('data-cb', 'on'); document.getElementById('cb-toggle').checked = true; }
+  })();
+</script>

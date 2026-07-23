@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" data-theme="daylight" data-persona="intermediate" data-cb="off">
+<head>
+{% set org_name = config.extra.org_name | default(value="") %}
+{% set org_tagline = config.extra.tagline | default(value="") %}
+{% set page_title = org_name ~ " — " ~ org_tagline %}
+{% include "_head.html" %}
+</head>
+<body>
+
+{% include "_theme_picker.html" %}
+
+<header class="band hero">
+  <div class="wrap">
+    <p class="eyebrow">{{ org_name }} · portfolio</p>
+    <h1>{{ org_name }}</h1>
+    <p class="lede">{{ config.extra.tagline | default(value="") }}</p>
+    {% if config.extra.status_detail %}
+    <p class="status"><span class="dot dot-{{ config.extra.status_kind }}"></span> {{ config.extra.status_detail }}</p>
+    {% endif %}
+  </div>
+</header>
+
+<main class="wrap">
+
+  {% if config.extra.blurb %}
+  <section class="lead-para">
+    <p>{{ config.extra.blurb }}</p>
+  </section>
+  {% endif %}
+
+  <section>
+    <h2>Products</h2>
+    <p class="section-sub">Every repo in a <code>portfolio</code> org is a product with its own
+      page. Status is stated plainly — never overstated.</p>
+    <div class="cards">
+      {% set products = get_section(path="_index.md") %}
+      {% for page in products.pages %}
+      <a class="card product-card" href="{{ page.permalink }}">
+        <div class="card-head">
+          <h3>{{ page.title }}</h3>
+          <span class="badge badge-{{ page.extra.status_kind }}">{{ page.extra.status_kind }}</span>
+        </div>
+        <p class="card-role">{{ page.extra.role }}</p>
+        <p>{{ page.extra.card_blurb | default(value=page.extra.tagline) }}</p>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+
+</main>
+
+<footer class="band foot">
+  <div class="wrap">
+    <p>{{ org_name }} — the family's shared substrate. Built with CommonStage.</p>
+  </div>
+</footer>
+
+{% include "_theme_sync.html" %}
+</body>
+</html>
