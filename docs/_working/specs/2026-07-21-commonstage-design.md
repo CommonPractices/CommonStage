@@ -726,6 +726,53 @@ LiteController exist **locally but unpushed**.
 
 ---
 
+## 8b. Findings from the first hand-built page (2026-07-22)
+
+The first product page (TestingAutoPilot, hand-written before any template) surfaced findings that
+belong in the design, not just in that page's CSS. It was built from real repo content and driven to
+**pass the full accessibility matrix by measurement** — 48 text elements × 5 themes × colour-blind
+on/off, 10/10 cells, zero failures, with a self-testing contrast checker that rejects a known-bad
+pair each run.
+
+**F1 — the canonical theme set is `CommonMind/visual-identity.md §1a`, not `foundation.css`.** The
+five required themes are **daylight · dark · warm · paper · maxcontrast**, plus the **colour-blind
+modifier** (`data-cb`), which §1a is explicit is *not* a theme and cannot be dropped. `foundation.css`
+*implements* this; the doctrine *defines* it. A CommonStage template **must** ship all five in one
+picker plus a separate colour-blind toggle (the §-checklist requirement), and the generator should
+treat the theme set as coming from the doctrine, never hard-code its own list.
+
+**F2 — `product.css` must not be free to place arbitrary ink-on-surface combinations. This is the
+strongest template-contract signal so far.** Every contrast failure came from the page CSS choosing a
+foundation ink for a surface foundation did not calibrate it against:
+
+- Page-ground inks (`--ink-dim`, `--ink-faint`) placed on a **coloured band** — bands carry their own
+  `--band-ink`, calibrated per theme.
+- An **accent fill** behind light text — foundation deliberately never fills with `--accent` (dark
+  `--accent` = `#FF4438` gives white only ~3.4:1); its primary button is `--ink` on `--ground`, and
+  accent is used for **borders/text**, never a fill.
+
+**The template should constrain which foundation tokens are legal on which surface** — band text →
+`--band-ink`; primary action → `--ink`/`--ground`; body → page inks — so a page author *cannot*
+reintroduce these failures. This is Web UI §2.1's (`CommonMind/web-ui-doctrine.md`) *"cosmetic
+freedom over a floor the stylesheet cannot break"* applied to the **template layer**, not just the CSS
+cascade (Web UI §2.1, `CommonMind/web-ui-doctrine.md`). It is the concrete form of §8a A2's warning
+that the product template is the untested part.
+
+**F3 — the hostile-stylesheet acceptance test (Web UI §2.1) is still owed** and is now more clearly
+scoped: it must confirm the `@layer floor-hard`/`floor-soft` floor holds against a `product.css` that
+*tries* to break it, watched to fail against the unprotected version. F2 is the design that keeps a
+*well-meaning* author safe; F3 proves the floor holds against a *hostile* one.
+
+**F4 — build-time signals confirmed reachable.** Real release/download data (`gh api` on the org's
+repos) rendered as page content without any browser-side call — the §4.3 build-time-fetch decision is
+implementable as specified.
+
+**Stack conformance, measured (supersedes §8.2's doc-only check):** `foundation.css` placed in Zola's
+`static/` arrived in `public/` **byte-for-byte identical** (23,813 bytes, `cmp` clean). Web UI §2's
+editable-replaceable-CSS requirement is verified against the real shipped file, not just Zola's docs.
+
+---
+
 ## 9. What this design does not cover
 
 - The visual design itself — CommonStage owns page *structure*; foundation.css owns the *look*.
