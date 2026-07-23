@@ -695,6 +695,13 @@ the same gap §8a A2 flags — a product template fitted to shipping products �
 it bites first and hardest. `exclude` remains available for the occasional genuinely-private repo,
 but it is **not** the mechanism protecting star #1.
 
+> ⭐ **PD dependency, recorded 2026-07-22.** This decision (render-everything) satisfies Honest
+> status **only if** the template renders an unfinished repo *as* unfinished — never dressed as a
+> shipping product. That guarantee lives entirely in **§8b F2** (the template must distinguish
+> maturity honestly). **Render-everything is therefore conditional on F2**; if the template does not
+> visibly distinguish shipping from unfinished, render-everything violates star #1. The dependency
+> is made explicit here so it cannot be lost when the template is built.
+
 ---
 
 ## 8a. Adversarial review — 2026-07-21
@@ -751,12 +758,19 @@ foundation ink for a surface foundation did not calibrate it against:
   `--accent` = `#FF4438` gives white only ~3.4:1); its primary button is `--ink` on `--ground`, and
   accent is used for **borders/text**, never a fill.
 
-**The template should constrain which foundation tokens are legal on which surface** — band text →
-`--band-ink`; primary action → `--ink`/`--ground`; body → page inks — so a page author *cannot*
-reintroduce these failures. This is Web UI §2.1's (`CommonMind/web-ui-doctrine.md`) *"cosmetic
-freedom over a floor the stylesheet cannot break"* applied to the **template layer**, not just the CSS
-cascade (Web UI §2.1, `CommonMind/web-ui-doctrine.md`). It is the concrete form of §8a A2's warning
-that the product template is the untested part.
+**⭐ HARD REQUIREMENT (PD-ratified 2026-07-22): the template MUST constrain which foundation tokens
+are legal on which surface** — band text → `--band-ink`; primary action → `--ink`/`--ground`; body →
+page inks — so a page author *cannot* reintroduce these failures. This is Web UI §2.1's
+(`CommonMind/web-ui-doctrine.md`) *"cosmetic freedom over a floor the stylesheet cannot break"*
+applied to the **template layer**, not just the CSS cascade. It is the concrete form of §8a A2's
+warning that the product template is the untested part.
+
+> **Why HARD, per the PD run.** Accessibility is North Star #2. An unconstrained `product.css` is
+> *how all ~20 contrast failures happened*, and the page passes today only because it was hand-fixed
+> and measured. "The template is safe" is therefore **true of one page by hand, not true of the
+> system** — the §11 Correctness trap (a claim that holds for the instance asserted as if it holds
+> for the system). Leaving the palette free would rest stars #2 and #4 on manual vigilance. The
+> constraint is not a nicety; it is what makes the accessibility claim true at the template layer.
 
 **F3 — the hostile-stylesheet acceptance test (Web UI §2.1) is still owed** and is now more clearly
 scoped: it must confirm the `@layer floor-hard`/`floor-soft` floor holds against a `product.css` that
@@ -770,6 +784,15 @@ implementable as specified.
 **Stack conformance, measured (supersedes §8.2's doc-only check):** `foundation.css` placed in Zola's
 `static/` arrived in `public/` **byte-for-byte identical** (23,813 bytes, `cmp` clean). Web UI §2's
 editable-replaceable-CSS requirement is verified against the real shipped file, not just Zola's docs.
+
+### 8b.1 The product-page shape is NOT a CommonFraming blueprint
+
+Considered and **rejected 2026-07-22.** A blueprint describes a recurring *shape that others build
+instances of* (`CommonFraming/CHARTER.md` §1). The product-page shape is not that: **CommonStage is
+the builder of these pages — the shape is its own output, not a pattern anyone reimplements.**
+Abstracting it into CommonFraming would describe CommonStage's job back to it. The shape lives where
+it is produced: in CommonStage. (Owner's read; the earlier "future blueprint candidate" note was
+wrong on this and is withdrawn.)
 
 ---
 
