@@ -1,16 +1,16 @@
 # CommonStage
 
-The family's shared web presentation layer: the standard, templates, styling, config schema, and
-generator for the public web pages of every family Org and product.
+The shared web presentation layer: the standard, templates, styling, config schema, and
+generator for the public web pages of every Org and product.
 
 **Status: working. Two proving sites, the extracted apparatus, and a config-driven generator that
-builds a family site from config alone — verified: generated output passes the full accessibility
+builds a site from config alone — verified: generated output passes the full accessibility
 matrix. Deployment to the server is the remaining piece.**
 
 ## What it is
 
-Seven family Orgs have no public web presence. Built ad hoc, they would read as seven unrelated
-projects. CommonStage makes them read as one family — a common look, a common page shape, and a
+Seven Orgs have no public web presence. Built ad hoc, they would read as seven unrelated
+projects. CommonStage makes them read as one set — a common look, a common page shape, and a
 common way of declaring what a site contains.
 
 Each org declares its own shape as data, in a site config in that org's `.github` repo:
@@ -90,7 +90,7 @@ not a second copy.
 2. **Accessibility** — every visitor can use the page, across every modality it has.
 3. **Comprehension** — a visitor learns what it does and whether it's for them, fast.
 4. **Obtainability** — the visitor can actually get it and run it.
-5. **Family coherence** — it visibly belongs with its siblings.
+5. **Sibling coherence** — it visibly belongs with its siblings.
 
 For what a North Star *is*, see the North Stars Doctrine (`CommonMind/north-stars-doctrine.md`).
 
