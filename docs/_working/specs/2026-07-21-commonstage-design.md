@@ -44,77 +44,124 @@ at Apache rather than BSL.
 
 ## 1a. North Stars
 
-**Ratified by the owner, 2026-07-22.** This is CommonStage's **authoritative** statement of its own
-ordered values; other mentions in this spec point here rather than re-listing them
-(North Stars Doctrine §2 (`CommonMind/north-stars-doctrine.md`)).
+**Ratified by the owner, 2026-07-22. Corrected 2026-08-03** — the set as ratified was missing a
+Doctrine-tier axiom; see §1a.4. This is CommonStage's **authoritative** statement of its own
+ordered values; other mentions in this spec point here rather than re-listing them.
 
-For what a North Star *is* — small, ordered, alignment near-non-negotiable while the *means* of
-alignment stays negotiable — see the North Stars
-Doctrine (`CommonMind/north-stars-doctrine.md`). That framework is **cited, not re-derived** here; what
-follows are CommonStage's own values.
+For what a North Star *is* — an axiom, not a conclusion; alignment near-non-negotiable while the
+*means* of alignment stays negotiable — see the [North Stars
+Doctrine](../../../../CommonMind/doctrines/north-stars-doctrine.md). That framework is **cited, not
+re-derived** here.
+
+**The four Doctrine-tier axioms bind this project** ([North Stars
+§1.2](../../../../CommonMind/doctrines/north-stars-doctrine.md)): *a North Star cannot be refused;
+no tier declines a star. What varies is a star's rank and its reach — never whether it binds.*
+CommonStage states its **ranking** and its **reach**, and adds stars of its own on top — which
+§2.3 expressly permits: **the four are a floor, not a ceiling.**
 
 **These are the values of the visitor**, not of the build. CommonStage's job is the public face of
 the **apps** — the product page is where someone decides whether to download DeckLibre or
 AutoPilot. A technically-correct site nobody wants to use would satisfy a pipeline-shaped set
 completely; that is the failure this ordering exists to prevent.
 
+### 1a.1 The set
+
+**Axioms, ranked and reached for this project.** Inherited, never declined.
+
+| # | Star | Rank + reach here |
+|---|---|---|
+| 1 | **Honest** | The page never overstates what exists or how ready it is — **and the same prohibition binds the work**: a status, a "done", a claim about what was rendered or verified is itself a claim about a condition ([North Stars §2](../../../../CommonMind/doctrines/north-stars-doctrine.md)). Ranked first because a site's only real currency is that its claims hold. |
+| 2 | **Accessibility** | Every visitor can use the page, across every modality it has. **A ranked star, not a floor** (§1.4's first form): a product page carrying screenshots, install flows and status indicators is a materially richer surface than doctrine-rendering, and accessibility genuinely decides outcomes there. |
+| 3 | **Usability** | The default path is walkable: a visitor who has read nothing completes the primary flow — *understand what this is*, then *get it*. **§1a.2 splits this into the two stars that actually bite here** — Comprehension and Obtainability — which are Usability at this product's altitude, not replacements for it. |
+| 4 | **Choice** | **Reach: narrow, and stated rather than assumed.** A visitor does not configure a web page, so the axiom has little surface to bind — but it is not moot. It binds where the site *does* offer alternatives: the **theme picker**, which honours the OS preference and lets the visitor override it; and download/install alternatives, where a page offers **every** route that exists rather than the one route the template found convenient. Per [§2.4](../../../../CommonMind/doctrines/north-stars-doctrine.md), any such alternative is **disclosed by a reveal, never a feature toggle**. |
+
+**Project stars, added on top** ([§2.3](../../../../CommonMind/doctrines/north-stars-doctrine.md) —
+a project may introduce stars of its own):
+
 | # | Star | Gloss |
 |---|---|---|
-| 1 | **Honest status** | The page never overstates what exists or how ready it is. |
-| 2 | **Accessibility** | Every visitor can use the page, across every modality it has. |
-| 3 | **Comprehension** | A visitor learns what it does and whether it's for them, fast. |
-| 4 | **Obtainability** | The visitor can actually get it and run it. |
-| 5 | **Family coherence** | It visibly belongs with its siblings. |
+| 5 | **Comprehension** | A visitor learns what it does and whether it is for them, fast. |
+| 6 | **Obtainability** | The visitor can actually get it and run it. |
+| 7 | **Set coherence** | It visibly belongs with its siblings — one look across every Org and product page. |
 
-**Accessibility is a ranked star (§1.4's first form), not a floor.** An earlier draft proposed the
-floor form on the grounds that CommonStage's modality surface is narrow. **The owner corrected
-this:** a product page carrying screenshots, install flows, and status indicators is a materially
-richer surface than doctrine-rendering, and accessibility genuinely decides outcomes there.
+### 1a.2 Why Comprehension and Obtainability are named separately
 
-### 1a.1 The reality test
+**Usability is the axiom; these two are what it decomposes into on a product page**, and they are
+ranked separately because **they conflict with each other and with the axioms in different
+directions** (§1a.3). Naming only "Usability" would hide those conflicts behind one word and leave
+the ordering unable to resolve them.
 
-Per §1.3 (`CommonMind/north-stars-doctrine.md`), a star that has never forced an unwelcome outcome is a
-slogan. Each row names a place the value **overruled** a more convenient choice:
+They do **not** replace Usability, and the axiom is not discharged by them: a page that is
+comprehensible and obtainable but hostile to walk through still fails #3.
 
-| Star | Where it forced an outcome |
-|---|---|
-| **Honest status** | §4.4, three times: no "coming soon" placeholder; absence rendered as absence; a missing `branch` reported rather than silently substituted. It also killed the *"fail loudly, publish nothing"* proposal — which would have blocked the pre-public pattern outright — and it forbids dressing a pre-public repo as a shipping product. |
-| **Accessibility** | §4.2 — no config field may lower the floor and no knob disables the contrast audit. It also **gated the stack pick**: Web UI §2 (`CommonMind/web-ui-doctrine.md`) conformance (CSS shipping as editable, replaceable files) was treated as disqualifying-if-failed, and Zola was **verified against it before selection**, not after (§8.2). A star that can eliminate a candidate outright is not decoration. |
-| **Comprehension** | §3 — the product page carries screenshots and a real description rather than a repo name and a link. A repo listing is not a product page. |
-| **Obtainability** | Downloads and install instructions are page **content**, not a link into docs. ⚠️ **Thinnest evidence in the table** — this star mostly judges work not yet built (§8a A2 flags the product template as the untested part). Watch it. |
-| **Family coherence** | The founding requirement — *"a common look for all the web pages"* — which forced the shared-apparatus decision over per-repo sites, and which §4.5's one-build model serves. |
-
-### 1a.2 Where the ordering bites
+### 1a.3 Where the ordering bites
 
 An ordering earns its keep only where it resolves a real conflict:
 
-- **Honest status ▸ Comprehension.** A page is more compelling if you omit that something is alpha.
-  Status wins — **even when it costs the download.**
-- **Accessibility ▸ Comprehension, Family coherence.** If the shared look ever fails a contrast or
+- **Honest ▸ Comprehension.** A page is more compelling if you omit that something is alpha.
+  Honesty wins — **even when it costs the download.**
+- **Accessibility ▸ Comprehension, Set coherence.** If the shared look ever fails a contrast or
   focus requirement, **the look changes.** This is the one that will actually hurt someday; ranking
   it #2 is what makes it real.
-- **Comprehension ▸ Family coherence.** If the shared template genuinely obscures what an app does,
+- **Comprehension ▸ Set coherence.** If the shared template genuinely obscures what an app does,
   **the template bends.** Coherence is the founding requirement, not a straitjacket.
-- **Obtainability ▸ Family coherence.** Install instructions that do not fit the template win; the
+- **Obtainability ▸ Set coherence.** Install instructions that do not fit the template win; the
   template adapts.
+- **Accessibility ▸ Choice.** Where the site offers an alternative, it is a **reveal**, never a
+  toggle that makes capability conditionally absent
+  ([§2.4](../../../../CommonMind/doctrines/north-stars-doctrine.md)).
 
-### 1a.3 Deliberately excluded
+### 1a.4 Correction of record — the ratified set was missing an axiom
+
+**The set ratified 2026-07-22 listed five stars: Honest status · Accessibility · Comprehension ·
+Obtainability · Family coherence. It contained no Choice, and no Usability.** Under [North Stars
+§1.2](../../../../CommonMind/doctrines/north-stars-doctrine.md) that set was not a legal ranking —
+an axiom cannot be declined, only re-ranked and re-reached.
+
+**How it happened, because the mechanism matters more than the omission.** The section did not
+forget Choice; it believed it had been *authorised* to drop it. §1a.3 as ratified read:
+
+> *"**Not a doctrine-named set by reference.** §2.1 permits naming a set by reference as an
+> explicit ratified choice; it was available and deliberately not taken — two of these five stars
+> have no counterpart in it."*
+
+**[§2.1](../../../../CommonMind/doctrines/north-stars-doctrine.md) says no such thing.** It is
+titled *"Why the base set is ordered"*, and its content is that a project which has **not** stated
+its own ranking **inherits** the doctrine's. There is no naming-by-reference permission there, and
+nothing in it makes an axiom optional.
+
+**One misread citation authorised the omission, and everything built on top of it was internally
+consistent** — which is why a careful, well-reasoned section stayed non-conformant through a
+ratification. The commit that retired `family` (`25b1443`) caught the symptom and recorded it as
+owner-needed; this is the correction.
+
+**What changed in this rewrite:**
+
+| Was | Now | Why |
+|---|---|---|
+| "Honest status" | **Honest** (#1), reach widened | The axiom binds the builders, not only the build; "status" scoped away half of it |
+| — | **Usability** (#3) | Inherited; §1a.2 states how Comprehension and Obtainability decompose it |
+| — | **Choice** (#4), reach stated | Inherited. Narrow surface, but §1.2 forbids declining it — and it does bind the theme picker and install alternatives |
+| Comprehension, Obtainability | Unchanged, renumbered as **project stars** | Legitimate additions under §2.3 |
+| "Family coherence" | **Set coherence** | `family` is retired ([Terminology-Migration §5c](../../../../CommonMind/doctrines/terminology-migration-doctrine.md)); the star itself is untouched |
+| §1a.3's naming-by-reference bullet | **Removed** | It cited a rule that does not exist |
+
+### 1a.5 Deliberately excluded
 
 - **Ease of authoring** and **Independence of content repos** — both real, both still true, both
-  **means rather than values** (§1.1 (`CommonMind/north-stars-doctrine.md`)). They serve the visitor by
-  making a coherent site cheap enough to maintain. They remain design rationale in §4.1 and
-  §4.5; freezing a means into a mandate is the scope-widening failure.
+  **means rather than values**
+  ([§1.1](../../../../CommonMind/doctrines/north-stars-doctrine.md)). They serve the visitor by
+  making a coherent site cheap enough to maintain. They remain design rationale in §4.1 and §4.5;
+  freezing a means into a mandate is the scope-widening failure.
 - **Speed** — present in the presentation-layer set, excluded here: build speed does not
   discriminate at this scale (§8.2, ~37 files vs. a ~500-page threshold), so it would be a slogan.
-- **Not a doctrine-named set by reference.** §2.1 (`CommonMind/north-stars-doctrine.md`) permits naming a
-  set by reference as an explicit ratified choice; it was available and **deliberately not
-  taken** — two of these five stars have no counterpart in it.
 
 > **Provenance.** An earlier draft derived stars from the *build pipeline* (Truthfulness · Ease of
 > authoring · Independence · Choice) and read as documentation values. The owner rejected it:
-> *"They are great for documentation an all, but most of the repos are (will be) apps."* The ordering
-> shape survived; the subjects did not. The error was **scope, not detail** — values derived from the
-> machinery in front of us rather than from what the product is for.
+> *"They are great for documentation an all, but most of the repos are (will be) apps."* The
+> ordering shape survived; the subjects did not. The error was **scope, not detail** — values
+> derived from the machinery in front of us rather than from what the product is for. **Choice was
+> in that draft and did not survive the rewrite** (§1a.4).
 
 ---
 
@@ -423,7 +470,7 @@ concretized **from what the two sites actually consumed**, not invented. Working
 | `description` | authored | Body prose. |
 | `screenshots`, `install`, `featured_signals` | optional | Product-page content. |
 
-**`status.kind` is an ENUM — this is what makes Honest status (#1) enforceable rather than decorative.**
+**`status.kind` is an ENUM — this is what makes Honest (#1) enforceable rather than decorative.**
 `detail` is free text that elaborates the kind (e.g. *"cold, not frozen"*), keeping nuance; `kind` is
 a machine-checkable maturity claim that drives the status colour and can be validated:
 
@@ -515,10 +562,10 @@ thin — CommonStage had no stated ordering, and manufacturing one to make the a
 is the failure §11 warns about. The set is now ratified in [§1a](#1a-north-stars).)*
 
 **The ratified set supports a separate repo, and the strongest support comes from the top star.**
-**Honest status** (#1) requires the site to report its own delta — rendered, unpublished, faulted
+**Honest** (#1) requires the site to report its own delta — rendered, unpublished, faulted
 (§4.4) — which means the apparatus must **release, version, and be verifiable**. CommonMind
 explicitly has no releases and no version numbers, so hosting a thing that must version inside a
-thing that must not is a direct clash. **Family coherence** (#5) argues the same way from the other
+thing that must not is a direct clash. **Set coherence** (#7) argues the same way from the other
 end: one apparatus producing one look is the founding requirement, and it needs a single home that
 is neither a doctrine nor a wire contract. **Accessibility** (#2) is neutral on the *location*
 question — the floor holds wherever the code lives — and is stated as such rather than stretched
@@ -654,7 +701,7 @@ renders an index with **zero** product cards. Two of seven orgs are in this stat
 blurb render normally; the product section is simply absent — no cards, no placeholder, no
 "coming soon", and the site is **not** skipped.
 
-**Why this is the Honest status (#1) answer.** The org genuinely exists and has an identity worth
+**Why this is the Honest (#1) answer.** The org genuinely exists and has an identity worth
 showing; what does not exist is a published product. Rendering the org while omitting the product
 list states exactly that and nothing more. The alternatives each say something false or unhelpful:
 skipping the site entirely implies the org does not exist, and a placeholder card advertises a
@@ -683,7 +730,7 @@ or otherwise) — an implementation question for the plan, not a design question
 **Closed. CommonStage's own ordered set is ratified and lives in [§1a](#1a-north-stars)**, which is
 the authoritative statement per North Stars Doctrine §2 (`CommonMind/north-stars-doctrine.md`).
 
-Honest status · Accessibility · Comprehension · Obtainability · Family coherence.
+Honest · Accessibility · Usability · Choice · Comprehension · Obtainability · Set coherence (§1a).
 
 **What the gap actually was.** Not invented values — the borrowed ordering was real and
 ratified (verified 2026-07-21 in `SurfaceWorks/.github/profile/README.md`). The defect was
@@ -739,11 +786,11 @@ inversion, no third shape, no per-repo maturity field.
 
 **Why this is correct, not merely accepted.** This spec initially argued for an opt-in inversion on
 the grounds that a workshop holds *"repos not intended for public presentation"* which
-render-everything would surface, colliding with **Honest status (#1)**. **That premise was wrong.**
+render-everything would surface, colliding with **Honest (#1)**. **That premise was wrong.**
 Workshop's purpose *is* public visibility — so render-everything is the behaviour that matches the
 org's intent, and an opt-in list would suppress exactly what the org exists to show.
 
-**What Honest status actually demands here** is narrower than the earlier reading, and it is a
+**What Honest actually demands here** is narrower than the earlier reading, and it is a
 **presentation** requirement rather than an inclusion one: a workshop project must not be **dressed
 up as a shipping product.** Star #1 forbids overstating readiness; it does not forbid showing
 unfinished work. Showing an experiment, plainly labelled as an experiment, satisfies it fully —
