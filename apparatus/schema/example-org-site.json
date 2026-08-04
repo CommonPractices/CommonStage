@@ -6,11 +6,11 @@
   "shape": "portfolio",
 
   "name": "CommonPractices",
-  "tagline": "The shared substrate every other family here is built on. Not a product — the ground they stand on.",
+  "tagline": "The shared substrate every other Org here is built on. Not a product — the ground they stand on.",
   "blurb": "Independent programs interoperate because they conform to the same practices — not because they share code.",
   "status": {
     "kind": "living",
-    "detail": "Living · pre-1.0, co-evolving with the family"
+    "detail": "Living · pre-1.0, co-evolving with the projects"
   },
 
   "_optional": {

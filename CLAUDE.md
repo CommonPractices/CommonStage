@@ -1,6 +1,6 @@
 # CommonStage — Project Directives
 
-Sits under `~/.claude/CLAUDE.md` (global) and `~/repositories/CLAUDE.md` (family). Those apply;
+Sits under `~/.claude/CLAUDE.md` (global) and `~/repositories/CLAUDE.md` (cross-project). Those apply;
 this adds project-specific rules and OVERRIDES on conflict.
 
 > **This file was created 2026-07-27 to carry the notice below.** It held no project directives
@@ -17,7 +17,7 @@ updated against the current doctrine. It is not a standing rule.
 changed, and why it affects this project's own stated values:
 
 - **Four axioms now bind every project — `Honest → Accessibility → Usability → Choice`** (§2).
-  They are the *definition* of a North Star in this family, not a suggestion. A project does not
+  They are the *definition* of a North Star here, not a suggestion. A project does not
   choose whether they bind; it states their **rank** and **reach** for its own surface. A star can
   never be refused (§1.2).
 - **`§1.3`'s reality test is REPEALED**, and so is `§3`'s evidence requirement. If this project's

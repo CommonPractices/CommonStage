@@ -9,7 +9,7 @@ status_kind = "living"
 repo = "https://github.com/CommonPractices/CommonMind"
 +++
 
-CommonMind holds the family's cross-project principles: how a secret is handled, where a file
+CommonMind holds the cross-project principles: how a secret is handled, where a file
 belongs on each OS, how a decision is adjudicated, what a North Star is. It ships **no code and no
 version numbers** — it is read, referenced, and depended on for its rules, not its releases.
 

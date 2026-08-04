@@ -6,7 +6,7 @@ Reads the two strict-JSON config files the schema defines (spec §4.6):
 
 Validation is where Honest status (North Star #1) becomes enforceable rather
 than decorative: status.kind must be one of a defined set, so a page can never
-claim a maturity the family has not defined. An off-enum value is a config
+claim a maturity the project has not defined. An off-enum value is a config
 error, never a silent pass.
 
 Strict JSON only (CommonMind/data-format-doctrine.md): json.load rejects
@@ -69,7 +69,7 @@ def _validate_status(status, where):
         allowed = ", ".join(sorted(STATUS_KINDS))
         raise ConfigError(
             f"{where}: status.kind '{kind}' is not a defined maturity. "
-            f"Allowed: {allowed}. (A page may not claim a maturity the family "
+            f"Allowed: {allowed}. (A page may not claim a maturity the project "
             f"has not defined — spec §4.6.)"
         )
     # detail is free text and optional; kind is the load-bearing part.

@@ -2,7 +2,7 @@
   "_note": "Example per-repo product config. Lives at each product repo's root as .commonstage.json. Strict JSON (RFC 8259) per CommonMind/data-format-doctrine.md — no comments; annotate in _note fields. Consumed for the repo's product page; the org config (site.json) does NOT restate any of this.",
 
   "name": "CommonStage",
-  "tagline": "The family's shared web presentation layer — the standard, templates, styling, and generator behind every family Org and product page.",
+  "tagline": "The shared web presentation layer — the standard, templates, styling, and generator behind every Org and product page.",
   "role": "PRESENTATION · builds these pages",
 
   "status": {
@@ -10,7 +10,7 @@
     "detail": "Design stage · early: two proving sites, apparatus extracted, generator not built"
   },
 
-  "description": "CommonStage is the family's shared web presentation layer. This very site is built with it. It is at the design stage: the shape is settled and the first pages exist as hand-built proofs, but the reusable generator has not been extracted yet. Shown here honestly as work in progress — never dressed up as finished.",
+  "description": "CommonStage is the shared web presentation layer. This very site is built with it. It is at the design stage: the shape is settled and the first pages exist as hand-built proofs, but the reusable generator has not been extracted yet. Shown here honestly as work in progress — never dressed up as finished.",
 
   "_optional": {
     "screenshots": [],

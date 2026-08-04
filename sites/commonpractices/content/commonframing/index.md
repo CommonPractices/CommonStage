@@ -3,7 +3,7 @@ title = "CommonFraming"
 template = "product-page.html"
 [extra]
 role = "SHAPES · you adapt to it"
-tagline = "The family's repository of product-shape blueprints — describe a recurring shape once, so the next instance is 'supply the specifics,' not 're-derive the architecture.'"
+tagline = "The repository of product-shape blueprints — describe a recurring shape once, so the next instance is 'supply the specifics,' not 're-derive the architecture.'"
 status = "Draft · blueprints pre-1.0"
 status_kind = "draft"
 repo = "https://github.com/CommonPractices/CommonFraming"

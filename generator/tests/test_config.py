@@ -40,7 +40,7 @@ def test_offenum_status_kind_REJECTED():
         assert "awesome" in str(e) and "not a defined maturity" in str(e)
         return
     raise AssertionError("off-enum status.kind was ACCEPTED — a page could claim "
-                         "a maturity the family never defined")
+                         "a maturity the project never defined")
 
 
 def test_missing_required_field_rejected():

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""CommonStage generator — build a family site from configs + the apparatus.
+"""CommonStage generator — build a site from configs + the apparatus.
 
-One task, one entry point (family scripting doctrine): a thin orchestrator over
+One task, one entry point (utility-scripting doctrine): a thin orchestrator over
 generator/lib/. It reads an org's site.json and each product's
 .commonstage.json, computes the derived facts, fetches optional publication
 signals, assembles a Zola site from the shared apparatus, runs `zola build`,
@@ -114,7 +114,7 @@ def build(args):
 
 
 def main(argv=None):
-    p = argparse.ArgumentParser(description="Build a CommonStage family site.")
+    p = argparse.ArgumentParser(description="Build a CommonStage site.")
     p.add_argument("--org-config", required=True)
     p.add_argument("--repos-dir", required=True)
     p.add_argument("--out", required=True)
