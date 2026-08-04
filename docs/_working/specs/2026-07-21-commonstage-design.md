@@ -4,19 +4,18 @@
 **Date:** 2026-07-21
 **Owner:** jschwefel
 
-The family's shared web presentation layer: the standard, templates, styling, config schema, and
-eventually a generator for the public web pages of every family Org and product.
+The shared web presentation layer: the standard, templates, styling, config schema, and
+eventually a generator for the public web pages of every Org and product.
 
 ---
 
 ## 1. Purpose
 
-Seven family Orgs have no public web presence. Built ad hoc, they would read as seven unrelated
-projects. CommonStage makes them read as one family — a common look, a common page shape, and a
+Seven Orgs have no public web presence. Built ad hoc, they would read as seven unrelated
+projects. CommonStage makes them read as one set — a common look, a common page shape, and a
 common way of declaring what a site contains.
 
-**In scope:** every Org except **ColdBoreBallistics** (CBB is a separate business identity with its
-own branding rules; see the global CBB branding directive).
+**In scope:** every Org.
 
 Current orgs in scope, with what each actually holds on GitHub (verified 2026-07-21 via
 `gh api orgs/<org>/repos`):
@@ -55,7 +54,7 @@ Doctrine (`CommonMind/north-stars-doctrine.md`). That framework is **cited, not 
 follows are CommonStage's own values.
 
 **These are the values of the visitor**, not of the build. CommonStage's job is the public face of
-the family's **apps** — the product page is where someone decides whether to download DeckLibre or
+the **apps** — the product page is where someone decides whether to download DeckLibre or
 AutoPilot. A technically-correct site nobody wants to use would satisfy a pipeline-shaped set
 completely; that is the failure this ordering exists to prevent.
 
@@ -91,7 +90,7 @@ An ordering earns its keep only where it resolves a real conflict:
 
 - **Honest status ▸ Comprehension.** A page is more compelling if you omit that something is alpha.
   Status wins — **even when it costs the download.**
-- **Accessibility ▸ Comprehension, Family coherence.** If the family look ever fails a contrast or
+- **Accessibility ▸ Comprehension, Family coherence.** If the shared look ever fails a contrast or
   focus requirement, **the look changes.** This is the one that will actually hurt someday; ranking
   it #2 is what makes it real.
 - **Comprehension ▸ Family coherence.** If the shared template genuinely obscures what an app does,
@@ -103,12 +102,12 @@ An ordering earns its keep only where it resolves a real conflict:
 
 - **Ease of authoring** and **Independence of content repos** — both real, both still true, both
   **means rather than values** (§1.1 (`CommonMind/north-stars-doctrine.md`)). They serve the visitor by
-  making a coherent family site cheap enough to maintain. They remain design rationale in §4.1 and
+  making a coherent site cheap enough to maintain. They remain design rationale in §4.1 and
   §4.5; freezing a means into a mandate is the scope-widening failure.
-- **Speed** — present in the family presentation-layer set, excluded here: build speed does not
+- **Speed** — present in the presentation-layer set, excluded here: build speed does not
   discriminate at this scale (§8.2, ~37 files vs. a ~500-page threshold), so it would be a slogan.
-- **Not the family set by reference.** §2.1 (`CommonMind/north-stars-doctrine.md`) permits naming a
-  family set by reference as an explicit ratified choice; it was available and **deliberately not
+- **Not a doctrine-named set by reference.** §2.1 (`CommonMind/north-stars-doctrine.md`) permits naming a
+  set by reference as an explicit ratified choice; it was available and **deliberately not
   taken** — two of these five stars have no counterpart in it.
 
 > **Provenance.** An earlier draft derived stars from the *build pipeline* (Truthfulness · Ease of
@@ -155,13 +154,13 @@ These are two genuinely different kinds of multiplicity — *one product, many r
 products, one org*. Conflating them is the failure this flag exists to prevent.
 
 **CommonPractices as the `portfolio` half is deliberate, not incidental.** It carries by far the
-family's heaviest documentation (CommonMind alone is 37 files / ~7,250 lines with dense
+the heaviest documentation (CommonMind alone is 37 files / ~7,250 lines with dense
 inter-doctrine cross-linking), so it proves the expensive half of the apparatus — docs rendering —
 in phase one rather than deferring it. It also makes CommonStage **self-hosting**: the apparatus
 renders the org that contains it, so a docs-rendering regression is visible on the doctrine site the
-family reads most.
+set reads most.
 
-Other family orgs (SurfaceWorks, DeckLibre, StudioEnsemble, ObservationPost, jschwefel-workshop) are
+Other orgs (SurfaceWorks, DeckLibre, StudioEnsemble, ObservationPost, jschwefel-workshop) are
 in scope for the standard but are **not** proving sites; they adopt the shape once it is extracted.
 
 ---
@@ -184,7 +183,7 @@ Data out of code: the generator holds logic only. Changing what a site shows mea
 config, never the code.
 
 **Format: strict JSON** (RFC 8259), per
-Data Format Doctrine (`CommonMind/data-format-doctrine.md`) — this is a format the family itself
+Data Format Doctrine (`CommonMind/data-format-doctrine.md`) — this is a format the projects themselves
 defines, so the doctrine applies and JSONC/JSON5 are banned. Annotation goes in **data** (`_note`
 fields), never comments.
 
@@ -210,13 +209,13 @@ Neither star is sacrificed. Add: **nothing display-facing is derived from a name
 `hostname` rule).
 
 > ✅ **Resolved 2026-07-22 — CommonStage's own North Star set is ratified (§1a).** This paragraph
-> previously carried a warning: the tiering had been justified by invoking the family
+> previously carried a warning: the tiering had been justified by invoking the
 > presentation-layer ordering without CommonStage having stated a set of its own — the silent
 > inheritance §2.1 (`CommonMind/north-stars-doctrine.md`) forbids.
 >
 > **The warning is void, but note what the ratified set does *not* say.** Ease of authoring is
 > **deliberately not a star** (§1a.3) — it is a *means*. So the satisfy-both construction below
-> stands on its own engineering merits, and on serving the visitor by keeping a coherent family site
+> stands on its own engineering merits, and on serving the visitor by keeping a coherent site
 > maintainable; it is **not** justified by a ranking of ease against choice. That justification was
 > wrong twice over and is not reinstated here.
 
@@ -311,7 +310,7 @@ back to GitHub metadata — they must be authored.
   third-party beacon and no client-side collector.
 - **No field may lower the accessibility floor.** There is deliberately no way for a config to
   disable the contrast audit or override the `@layer` floor that
-  `CommonMind/assets/foundation.css` establishes. Accessibility is the family
+  `CommonMind/assets/foundation.css` establishes. Accessibility is the
   presentation layer's first North Star; a knob that can switch it off would make it advisory.
 
 ### 4.3 Publication signals are content — and they are optional
@@ -335,7 +334,7 @@ published** — one possible source among others. Identical behaviour today; no 
 **A repo's presence on the public host is not a fact about the repo. It is a fact about its stage.**
 
 A repo is worked and tested on the staging git host and reaches the public host only when it is
-worth pushing — the family's *don't push until you have something worthy* rule, given somewhere to
+worth pushing — the *don't push until you have something worthy* rule, given somewhere to
 actually live. **This is a permanent, recurring, intended lifecycle stage, not a transitional one.**
 
 Consequently:
@@ -361,9 +360,9 @@ there and isn't* survives. That report is a free progress signal from a system b
 
 ### 4.5 The build model — CI pulls, by identity
 
-**A CI builder on the git host pulls repo content and config, and renders the family's sites.**
+**A CI builder on the git host pulls repo content and config, and renders the sites.**
 Source repos know nothing about CommonStage: no site config of their own, no build toolchain, no
-webhook pointing back. One build produces the whole family site, which is what a *common* look
+webhook pointing back. One build produces the whole site, which is what a *common* look
 requires.
 
 This is coupling **by identity** — the builder names repos by remote coordinate, never by checkout
@@ -428,7 +427,7 @@ concretized **from what the two sites actually consumed**, not invented. Working
 `detail` is free text that elaborates the kind (e.g. *"cold, not frozen"*), keeping nuance; `kind` is
 a machine-checkable maturity claim that drives the status colour and can be validated:
 
-| `kind` | Means | Family example |
+| `kind` | Means | Example |
 |---|---|---|
 | `shipping` | Released, has versioned artifacts to download | AutoPilot (v3.5.0) |
 | `active` | Usable and maintained, no formal release cadence | — |
@@ -438,7 +437,7 @@ a machine-checkable maturity claim that drives the status colour and can be vali
 | `wip` | Design/build stage; not yet usable | CommonStage |
 
 The enum is **open to extension** (a new kind is added when a real product needs one), but a value
-outside it is a config error, not a silent pass — so a page can never claim a maturity the family
+outside it is a config error, not a silent pass — so a page can never claim a maturity the set
 has not defined.
 
 **Computed, never stored** (§4.1's SSoT rule, now itemised per file): canonical URL, org colour +
@@ -451,7 +450,7 @@ config alone, and the output passes the full a11y matrix. See §8b.3.
 
 ---
 
-## 5. Relationship to existing family assets
+## 5. Relationship to existing shared assets
 
 ### 5.1 `foundation.css` is consumed, never copied
 
@@ -532,7 +531,7 @@ machine with this exact checkout layout, the coupling
 Repository-Portability (`CommonMind/repository-portability-doctrine.md`) §0 forbids and which §5.1
 already flags in two sibling READMEs), the
 charter is deliberately anemic about domain and explicitly anticipates a different genre — so a
-*new* blueprint for a family web presence would be legitimate. But Charter §2 is absolute: **a
+*new* blueprint for a shared web presence would be legitimate. But Charter §2 is absolute: **a
 blueprint ships no code you depend on.** Since the chosen scope is a full apparatus (generator,
 templates, CSS, schema), CommonFraming cannot be its home. A blueprint could later describe the
 *shape*; it can never hold the apparatus.
@@ -555,7 +554,7 @@ Three charter amendments to avoid one repo is the worse trade. CommonTongue's ow
 precedent for splitting on altitude rather than stretching a repo: *"this is why it is its own repo
 and not part of blueprints."*
 
-**Recommendation:** new repo. Its cost is one more repo in the family; the alternative is weakening
+**Recommendation:** new repo. Its cost is one more repo; the alternative is weakening
 three charters that are currently true.
 
 ---
@@ -590,7 +589,7 @@ An earlier draft paired TestingAutoPilot with SurfaceWorks and flagged that **ne
 docs case**, leaving the expensive half of the apparatus unproven. **Resolved 2026-07-21 by the
 owner: the `portfolio` half of the pair is CommonPractices, not SurfaceWorks.** CommonMind alone is
 37 files / ~7,250 lines with dense inter-doctrine cross-linking and a README whose Documents table
-is ~35 substantial paragraphs in markdown table cells — the family's hardest docs target.
+is ~35 substantial paragraphs in markdown table cells — the hardest docs target.
 
 Docs rendering is therefore proven in phase one rather than deferred, and CommonStage is
 self-hosting (see §2, *Worked pair*).
@@ -686,7 +685,7 @@ the authoritative statement per North Stars Doctrine §2 (`CommonMind/north-star
 
 Honest status · Accessibility · Comprehension · Obtainability · Family coherence.
 
-**What the gap actually was.** Not invented values — the borrowed family ordering was real and
+**What the gap actually was.** Not invented values — the borrowed ordering was real and
 ratified (verified 2026-07-21 in `SurfaceWorks/.github/profile/README.md`). The defect was
 **silent inheritance**: CommonStage invoked a sibling's set without stating one of its own, which
 §2.1 (`CommonMind/north-stars-doctrine.md`) permits only as an explicit ratified choice. That route was
@@ -784,7 +783,7 @@ judgement rather than an oversight.**
 | # | Attack | Disposition |
 |---|---|---|
 | **A1** | The pair proves `portfolio` twice and `product` once (n=1); `product` may be "an index with one card minus the index" — a boolean inflated into an architecture. | **REJECTED.** `product` is a genuine shape with its own content, not a degenerate index. |
-| **A2** | `portfolio` renders repos, but products aren't repos: CommonMind (37 doctrine files), CommonFraming (ships no code), CommonTongue (a package) would each get a product page whose install/downloads/screenshots fields are empty. | **ACCEPTED, deferred.** "We will deal with it." Most of the family is WIP and CP is the closest thing to a full repo set that exists — which is *why* it is the proving site. Surface the template mismatch when the build hits it. |
+| **A2** | `portfolio` renders repos, but products aren't repos: CommonMind (37 doctrine files), CommonFraming (ships no code), CommonTongue (a package) would each get a product page whose install/downloads/screenshots fields are empty. | **ACCEPTED, deferred.** "We will deal with it." Most of the set is WIP and CP is the closest thing to a full repo set that exists — which is *why* it is the proving site. Surface the template mismatch when the build hits it. |
 | **A3** | Config in `.github` splits product identity across two repos and creates an unnamed currency obligation. | **MOOT — attack was misaimed.** The org is a **suite** (M365 : Word/Excel). Org-level identity belongs in `.github`; product facts belong to the product repo. Two tiers, not one split. |
 | **A4** | "No maintained product list" is false once `exclude`/`order`/`featured` are used; jschwefel-workshop (unrelated one-offs) is the live counterexample. | **NOTED, bounded** at the time. ⚠️ **Superseded 2026-07-22 (§8.7):** "workshop is *sui generis*" was the owner's framing then, but workshop is now **first-class** — the org for projects meant for the public eye. The attack lands even more weakly than recorded: render-everything matches that org's intent, so `exclude` is incidental rather than load-bearing. |
 | **A5** | Docs rendering is claimed proven, but the design has no position on the hardest artifact — CommonMind's 47 KB README whose Documents table is ~35 paragraphs in markdown cells. | **ACCEPTED as work, not defect.** "Then we prove it." This is exactly what the CP proving site is for. |
@@ -905,7 +904,7 @@ a full URL with scheme.
 The config-driven generator (`generator/`, Python, stdlib-only) now exists. It reads the §4.6 config
 files, computes the derived facts, fetches optional signals, assembles a Zola site from `apparatus/`,
 runs `zola build`, and prints the delta report. Thin orchestrator over `generator/lib/` per the
-family scripting doctrine.
+the scripting doctrine.
 
 **What building it confirmed:**
 
@@ -922,7 +921,7 @@ family scripting doctrine.
 
 - **The honest-status enum is enforced, not decorative.** `status.kind` outside the defined set is a
   fatal config error. The validating test was **watched to fail with the check disabled**, then pass
-  restored — the fix-isn't-fixed gate. A page cannot claim a maturity the family has not defined.
+  restored — the fix-isn't-fixed gate. A page cannot claim a maturity the set has not defined.
 
 - **Apparatus templates parameterized by config.** `product-page.html` and `portfolio-index.html`
   moved into `apparatus/` and read the org name from `config.extra`, so **one template set drives any
@@ -951,7 +950,6 @@ untested.
 
 - The visual design itself — CommonStage owns page *structure*; foundation.css owns the *look*.
 - Per-product content (copy, screenshots) — authored per product, not by this standard.
-- ColdBoreBallistics, which is out of scope by the global CBB branding directive.
 - The visual design itself is covered above; workshop's shape is **no longer** an uncovered item —
   see §8.7. It was previously listed here as *"check before applying `portfolio` to it"*, which is
   insufficient now that the org is first-class.
